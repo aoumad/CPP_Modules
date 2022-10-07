@@ -1,4 +1,4 @@
-NAME	= ./megaphone
+NAME	= ./phonebook
 	
 CC		= c++
 FLAGS	= -std=c++98 -Wall -Wextra -Werror 
@@ -16,7 +16,7 @@ all: $(NAME)
 
 $(NAME): 
 	@printf "$(CURSIVE)$(GRAY) 	- Compiling $(NAME)... $(RESET)\n"
-	@ $(CC) $(FLAGS) megaphone.cpp -o $(NAME)
+	@ $(CC) $(FLAGS) contact.cpp phonebook.cpp -o $(NAME)
 	@printf "$(GREEN)    - Executable ready.\n$(RESET)"
 
 clean:
