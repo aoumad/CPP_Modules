@@ -47,3 +47,13 @@ void    Fixed::setRawBits( int const raw)
     std::cout << "setRawBits member function called" << std::endl;
     this->_fixed_point = raw;
 }
+
+float   Fixed::toFloat(void) const
+{
+    return ((float)this->_fixed_point / (1 << this->_nFractBits));
+}
+
+int Fixed::toInt(void) const
+{
+    return (this->_fixed_point >> this->_nFractBits);
+}
