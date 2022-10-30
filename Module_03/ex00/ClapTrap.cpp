@@ -17,6 +17,8 @@ ClapTrap    ClapTrap::operator= (const ClapTrap& other)
     this->_points = other._points;
     this->_energyPoints = other._energyPoints;
     this->_attackDamage = other._attackDamage;
+
+    return (*this);
 }
 
 ClapTrap::~ClapTrap()
