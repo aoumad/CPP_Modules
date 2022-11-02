@@ -3,7 +3,7 @@
 WrongDog::WrongDog()
 {
     std::cout << "Wrong Dog constructor called" << std::endl;
-    this->type = "Wrong Cat";
+    this->type = "Wrong Dog";
 }
 
 WrongDog::WrongDog(cosnt WrongDog& other)

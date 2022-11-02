@@ -3,7 +3,7 @@
 
 #include "WrongAnimal.hpp"
 
-class WrongDog : public WrongAnimal
+class WrongDog
 {
 public:
     WrongDog();

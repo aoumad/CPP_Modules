@@ -16,7 +16,6 @@ Animal& Animal::operator= (const Animal& other)
     this->type = other.type;
 
     std::cout << "Animal assignement operator called" << std::endl;
-    return (*this);
 }
 
 void    Animal::makeSound() const

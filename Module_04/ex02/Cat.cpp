@@ -3,7 +3,6 @@
 Cat::Cat()
 {
     std::cout << "Cat constructor called" << std::endl;
-    this->type = "Cat";
 }
 
 Cat::~Cat()

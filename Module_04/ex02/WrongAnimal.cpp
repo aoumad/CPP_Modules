@@ -21,7 +21,6 @@ WrongAnimal::operator= (const WrongAnimal& other)
     this->type = other.type;
 
     std::cout << "Wrong Animal operator contrustor called" << std::endl;
-    return (*this);
 }
 
 void    WrongAnimal::getType() const
