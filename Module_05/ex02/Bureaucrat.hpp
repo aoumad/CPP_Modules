@@ -25,7 +25,6 @@ public:
     void                 gradeUp(void);
     void                 gradeDown(void);
     void                 signForm(const Form& form);
-    void                 executeForm(Form const & form) const;
 
     class GradeTooHighException:: public std::exception
     {

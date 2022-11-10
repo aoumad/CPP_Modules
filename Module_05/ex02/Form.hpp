@@ -4,6 +4,7 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 #include <exception>
+#include <fstream>
 
 class Bureaucrat; // C++ forward declaration
 
@@ -26,13 +27,15 @@ public:
     Form(std::string &name, int signGrade, int execGrade);
     Form(const Form& other);
     Form&   operator= (const Form& other);
-    ~Form();
+    virtual ~Form();
 
     void            beSigned(const Bureaucrat& obj);
     std::string     getName();
     int             getSignedGrade();
     int             getExecuGrade();
     bool            getSigned();
+
+    virtual void    execute(Bureaucrat const & executor) const = 0;
 
     //********** Exception class declaration ***********
     class GradeTooHighException:: public std::exception
@@ -46,7 +49,14 @@ public:
         public:
             virtual const char* what() const throw()
                 return ("You underrated the grade, which is limites in the range [1, 150]");
+
     };
+    class FormNotSignedException : public std::exception
+    {
+        public:
+            virtual const char* what() const throw() 
+                return ("Form not signed");
+    }
 };
 
 #endif
