@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
+#include <iomanip>
 
 
 class Contact
@@ -16,12 +18,12 @@ private:
 
 public:
     Contact(
-        std::string first_name;
-        std::string last_name;
-        std::string nickename;
-        std::string darkest_secret;
-        std::string phone_number;
-    )
+        std::string first_name, 
+        std::string last_name, 
+        std::string nickename,
+        std::string darkest_secret,
+        std::string phone_number
+    );
     ~Contact();
 
     std::string get_first_name();
@@ -31,10 +33,10 @@ public:
     std::string get_phone_number();
 
     int    set_first_name(std::string first_name);
-    int    set_last_name(std::string last_name;);
-    int    set_nickename()std::string nickename;;
-    int    set_darkest_secret(std::string darkest_secret;);
-    int    set_phone_number(std::string phone_number;);
-}
+    int    set_last_name(std::string last_name);
+    int    set_nickename(std::string nickename);
+    int    set_darkest_secret(std::string darkest_secret);
+    int    set_phone_number(std::string phone_number);
+};
 
 #endif

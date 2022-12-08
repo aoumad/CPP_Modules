@@ -1,65 +1,65 @@
-#include "phone_book.hpp"
+#include "phoneBook.hpp"
 
 Phonebook::Phonebook()
 {
     this->_index = 0;
     this->_contact_amount = 0;
     for (int i = 0; i < MAX_CONTACT; i++)
-        this->_contact[i] = new Contact;
+        this->_contacts[i] = new Contact;
 }
 
 Phonebook::~Phonebook()
 {
     for (int i = 0; i < MAX_CONTACT; i++)
-        delete this->_contact[i]
+        delete this->_contacts[i];
 }
 
-int Phonebook::add_contact()
+void Phonebook::add_contact()
 {
     Contact obj = Contact();
 
-    while (obj._first_name.empty() && std::cin.good() && std::cin.eof())
+    while (obj.first_name.empty() && std::cin.good() && std::cin.eof())
     {
         std::cout << "First name: ";
-        getline(std::cin, _first_name);
-        obj.set_first_name(_first_name);
-        if (obj._first_name.empty())
+        getline(std::cin, first_name);
+        obj.set_first_name(first_name);
+        if (obj.first_name.empty())
             std::cout << "INVALID INPUT: please enter non empty name!!" << std::endl;
     }
 
-    while (obj._last_name.empty() && std::cin.good() && std::cin.eof())
+    while (obj.last_name.empty() && std::cin.good() && std::cin.eof())
     {
         std::cout << "Last name: " ;
-        getline(std::cin, _last_name);
-        obj.set_last_name(_last_name);
-        if (obj._last_name.empty())
+        getline(std::cin, last_name);
+        obj.set_last_name(last_name);
+        if (obj.last_name.empty())
             std::cout << "INVALID INPUT: please enter non empty name!!" << std::endl;
     }
     
-    while (obj._nickename.empty() && std::cin.good() && std::cin.eof())
+    while (obj.nickename.empty() && std::cin.good() && std::cin.eof())
     {
         std::cout << "Nickname: ";
-        getline(std::cin, _nickename);
-        obj.set_nickename(_nickename);
-        if (obj._nickename.empty())
+        getline(std::cin, nickename);
+        obj.set_nickename(nickename);
+        if (obj.nickename.empty())
             std::cout << "INVALID INPUT: please enter non empty name!!" << std::endl;
     }
     
-    while (obj._phone_number.empty() && std::cin.good() && std::cin.eof())
+    while (obj.phone_number.empty() && std::cin.good() && std::cin.eof())
     {
         std::cout << "Phone number: ";
-        getline(std::cin, _phone_number);
-        obj.set_phone_number(_phone_number);
-        if (obj._phone_number.empty())
+        getline(std::cin, phone_number);
+        obj.set_phone_number(phone_number);
+        if (obj.phone_number.empty())
             std::cout << "INVALID INPUT: please enter non empty number!!" << std::endl;
     }
 
-    while (obj._darkest_secret.empty() && std::cin.good() && std::cin.eof())
+    while (obj.darkest_secret.empty() && std::cin.good() && std::cin.eof())
     {
         std::cout << "Darkest secret: ";
-        getline(std::cin, _darkest_secret);
-        obj.set_darkest_secret(_darkest_secret);
-        if (obj._darkest_secret.empty())
+        getline(std::cin, darkest_secret);
+        obj.set_darkest_secret(darkest_secret);
+        if (obj.darkest_secret.empty())
             std::cout << "INVALID INPUT: please enter non empty string!!" << std::endl;
     }
 
@@ -89,7 +89,7 @@ void    Phonebook::search_contact()
     std::cin.ignore(1000, '\n');
 }
 
-void    Phonebook::ft_display_contact()const
+void    Phonebook::ft_display_contact() const
 {
     std::cout   << "|--------------Contact Display--------------|\n"
                 << "|-------------------------------------------|\n"
@@ -125,11 +125,11 @@ int main(void)
     {
         std::cout << "> ";
         getline(std::cin, s);
-        if (strcmp(s, "ADD"))
+        if (strcmp((const char *)s, "ADD"))
             Phonebook.add_contact();
-        else if (strcmp(s, "SEARCH"))
+        else if (strcmp((const char *)s, "SEARCH"))
             Phonebook.search_contact();
-        else if (strcmp(s, "EXIT"))
+        else if (strcmp((const char *)s, "EXIT"))
             break;
         else
             std::cout << "Command not found, please read the menu above!!" << std::endl;

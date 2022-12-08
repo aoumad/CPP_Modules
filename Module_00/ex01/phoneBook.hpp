@@ -6,17 +6,18 @@
 
 class Phonebook
 {
-    private:
-        Contact _contacts[8];
+private:
+    Contact _contacts[8];
     int    _index;
     int    _contact_amount;
-    int
 
 public:
     Phonebook();
     ~Phonebook();
     void    add_contact();
     void    search_contact();
-    void    display_contact();
+    void    display_contact() const;
     void    help_menu();
 };
+
+#endif
