@@ -2,7 +2,7 @@
 
 Contact::Contact()
 {
-    std::cout << "Constructor has been called" << std::endl
+    std::cout << "Constructor has been called" << std::endl;
 }
 
 Contact::~Contact()
@@ -10,40 +10,37 @@ Contact::~Contact()
     std::cout << "Destructor has been called" << std::endl;
 }
 
-// GETERS
-
 std::string Contact::get_first_name()
 {
-    return (_first_name);
+    return (this->_first_name);
 }
 
 std::string Contact::get_last_name()
 {
-    return (_last_name);
+    return (this->_last_name);
 }
 
 std::string Contact::get_nickename()
 {
-    return (_nickename);
+    return (this->_nickename);
 }
 
 std::string Contact::get_phone_number()
 {
-    return (_phone_number);
+    return (this->_phone_number);
 }
 
 std::string Contact::get_darkest_secret()
 {
-    return (_darkest_secret);
+    return (this->_darkest_secret);
 }
-
 
 int Contact::set_first_name(std::string first_name)
 {
-    if (trim(first_name) == "")
-        reutrn (1);
+    if (first_name == "")
+        return (1);
     for (size_t i = 0; i < first_name.size(); i++)
-        if (!(isalpha(first_name[i]) || first_name[i] == ' '))
+        if (!isalpha(first_name[i])
             return (1);
     if (first_name.length() > 10)
     {
@@ -56,17 +53,18 @@ int Contact::set_first_name(std::string first_name)
 
 int Contact::set_last_name(std::string last_name)
 {
-    if (trim(last_name) == "")
-        reutrn (1);
+    if (last_name == "")
+        return (1);
     for (size_t i = 0; i < last_name.size(); i++)
-        if (!(isalpha(last_name[i]) || last_name[i] == ' '))
+        if (!isalpha(last_name[i]))
             return (1);
     if (last_name.length() > 10)
     {
         last_name[9] = '.';
         last_name.erase(10, last_name.length() - 10);
     }
-    this->_last_name = last_name;
+    this->last_name = last_name;
+    return (0);
 }
 
 int Contact::set_nickename(std::string nickename)
@@ -116,4 +114,3 @@ int Contact::set_darkest_secret(std::string darkest_secret)
     }
     this->_darkest_secret = darkest_secret;
 }
-
