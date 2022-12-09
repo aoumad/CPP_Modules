@@ -1,19 +1,13 @@
 #include "contact.hpp"
 
-Contact::Contact(
-        std::string first_name, 
-        std::string last_name, 
-        std::string nickename,
-        std::string darkest_secret,
-        std::string phone_number
-        ): _first_name(first_name), _last_name(last_name), _nickename(nickename), _darkest_secret(darkest_secret), _phone_number(phone_number)
+Contact::Contact()
 {
-    std::cout << "Constructor has been called" << std::endl;
+    std::cout << "Contact constructor has been called" << std::endl;
 }
 
 Contact::~Contact()
 {
-    std::cout << "Destructor has been called" << std::endl;
+    std::cout << "Contact destructor has been called" << std::endl;
 }
 
 std::string Contact::get_first_name()

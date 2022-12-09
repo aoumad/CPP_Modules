@@ -17,13 +17,7 @@ private:
     std::string _phone_number;
 
 public:
-    Contact(
-        std::string first_name, 
-        std::string last_name, 
-        std::string nickename,
-        std::string darkest_secret,
-        std::string phone_number
-    );
+    Contact();
     ~Contact();
 
     std::string get_first_name();
