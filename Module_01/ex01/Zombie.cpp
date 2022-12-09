@@ -10,17 +10,17 @@ Zombie::~Zombie()
     std::cout << "The zombie " << this->_name << "got destructured" << std::endl;
 }
 
-Zombie::announce()
+void    Zombie::announce(void)
 {
     std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-Zombie::name_setter(std::string name)
+void    Zombie::name_setter(std::string name)
 {
-    this->name = name;
+    this->_name = name;
 }
 
-Zombie::name_getter()
+std::string Zombie::name_getter()
 {
     return (this->_name);
 }

@@ -1,11 +1,10 @@
 #include "Zombie.hpp"
 
-
 int main(void)
 {
-    int stack_name;
-    int heap_name;
-    int rand_name;
+    std::string stack_name;
+    std::string heap_name;
+    std::string rand_name;
     std::cout << "The witcher 🧙 is willing to create a zombie in stack and wants you to give him a name!!" << std::endl;
     std::cout << "The name of the stack zombie 🧟‍♂️: ";
     std::cin >> stack_name;

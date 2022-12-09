@@ -2,7 +2,8 @@
 
 Weapon::Weapon(std::string s)
 {
-    this->setType(s);
+    std::cout << "Constructor called" << std::endl;
+    setType(s);
 }
 
 Weapon::~Weapon()
@@ -10,12 +11,12 @@ Weapon::~Weapon()
     std::cout << "Destructor has been called" << std::endl;
 }
 
-Weapon::getType()
+const std::string&  Weapon::getType()
 {
     return (this->type);
 }
 
-Weapon::setType(std::string s)
+void    Weapon::setType(std::string s)
 {
     this->type = s;
 }
