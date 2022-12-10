@@ -32,8 +32,6 @@ Harl::~Harl()
 
 void    Harl::complain(std::string level)
 {
-    int i = 0;
-
     std::string choice[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
     t_func funcs[] = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 
@@ -45,5 +43,5 @@ void    Harl::complain(std::string level)
             return ;
         }
     }
-    std::cerr("The input you wrote is sadly didn't match the complain list!!") << std::endl;
+    std::cerr << "The input you wrote is sadly didn't match the complain list!!" << std::endl;
 }
