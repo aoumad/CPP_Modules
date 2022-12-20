@@ -255,3 +255,19 @@ Using an initialization list has several benefits:
     
 > **Note**
 > It is important to note that the initialization list must always come before the body of the                      constructor. If you try to initialize the member variables in the body of the constructor, the              compiler will give an error.
+
+    
+## Benifits of using Setters and Getters!
+-In object-oriented programming (OOP), setter and getter functions, also known as "accessor" and "mutator" methods, are used to manage the value of an object's private data members. Setter functions, also called "mutator methods," are used to set the value of a private data member, while getter functions, also called "accessor methods," are used to retrieve the value of a private data member.
+
+Using setters and getters has several benefits:
+
+- Encapsulation: Setters and getters allow you to hide the implementation details of a class from other objects and control how the class' data is accessed and modified. This is known as encapsulation.
+
+- Data validation: Setter functions can be used to perform data validation, ensuring that only valid data is assigned to an object's data members. For example, a setter function for a person's age might only allow ages greater than zero to be set.
+
+- Flexibility: Using setters and getters allows you to change the implementation of a class without affecting the code that uses it. For example, you could change the way an object's data is stored without affecting the code that sets or retrieves the data.
+
+- Code reusability: Setters and getters can be used in multiple classes, which allows you to reuse the same accessor and mutator code in different parts of your program.
+
+Overall, setters and getters are useful tools for implementing encapsulation and data hiding in C++ and other object-oriented programming languages. They allow you to control how objects' data is accessed and modified, which can make your code more robust, flexible, and maintainable.
