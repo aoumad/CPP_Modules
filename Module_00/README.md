@@ -1,7 +1,7 @@
 ## Table of content
 
 - [namespaces](#namespaces)
-- [stdio streams](#stdio-streams)
+- [standard input-output streams](#standard-input-output-streams)
 - [class & instance](#class--instance)
 - [member attributes & functions](#member-attributes--functions)
 - [this pointer](#this-pointer-the-self-keyword)
@@ -82,4 +82,32 @@ int main() {
 ```
 - In this example, we use the using keyword to import the foo function from the my_namespace namespace, so we can call it directly without qualifying it with the namespace name.
 
-I hope this helps! Let me know if you have any questions or if you'd like more information.
+## Standard input-output streams
+
+- in C++, the stdio streams are a group of classes that provide input and output functionality for reading from and writing to files and other input/output devices. The stdio streams are part of the C++ standard library and are defined in the <iostream> header file.
+
+The stdio streams include the following classes:
+
+◦ `std::istream`: A class for input streams, which are used to read data from a file or other input source.
+
+◦ `std::ostream`: A class for output streams, which are used to write data to a file or other output destination.
+
+◦ `std::iostream`: A class that combines the functionality of `std::istream` and `std::ostream`, allowing you to read from and write to a file or other input/output device.
+
+- The `stdio` streams use a concept called "stream buffer" to manage the flow of data between the stream and the underlying input/output device. The stream buffer is an abstract class that defines the interface for reading and writing data, and the `stdio` stream classes (`istream`, `ostream`, and `iostream`) are derived from the stream buffer class.
+
+- The `stdio` stream classes also have constructors and destructors, which are special member functions that are called when an object of the class is created or destroyed. The constructors are used to initialize the object's data members, and the destructors are used to clean up any resources that the object may have allocated.
+
+Here's an example of how to use the `std::cout` output stream to write to the console:
+
+```C++
+#include <iostream>
+
+int main() {
+    // Write a message to the console using the "<<" operator
+    std::cout << "Hello, world!" << std::endl;
+
+    return 0;
+}
+```
+- In this example, we use the `<<` operator to write a message to the `std::cout` output stream, which sends the message to the console. The `std::endl` manipulator is used to insert a newline character at the end of the message.
