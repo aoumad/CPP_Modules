@@ -75,11 +75,13 @@ void Phonebook::add_contact()
 void    Phonebook::search_contact()
 {
     int index_search = 0;
+    std::string s;
     ft_display_contact();
     std::cout << "Enter the contact\'s index: " << std::endl;
     std::cout << "> ";
-    std::cin >> index_search;
-    if (std::cin.fail() || (index_search < 0) || (index_search > 7))
+    std::cin >> s;
+    index_search = atoi(s.c_str());
+    if (std::cin.fail() || (index_search < 0) || (index_search > 7) || s.length() > 1)
         std::cout << "Invalid input!!" << std::endl;
     else
     {
