@@ -26,6 +26,8 @@ void Phonebook::add_contact()
         getline(std::cin, first_name);
         if (first_name.empty())
             std::cout << "INVALID INPUT: please enter non empty name!!" << std::endl;
+        printf("index : %d\n", _index);
+        std::cout << first_name << std::endl;
         _contacts[_index % 8].set_first_name(first_name);
     }
 
@@ -121,12 +123,10 @@ int main(void)
 {
     Phonebook Phonebook;
     std::string s;
-
     Phonebook.help_menu();
-    while (1)
+    std::cout << "> ";
+    while (getline(std::cin, s))
     {
-        std::cout << "> ";
-        getline(std::cin, s);
         if ((s.compare("ADD")) == 0)
             Phonebook.add_contact();
         else if ((s.compare("SEARCH")) == 0)
@@ -135,5 +135,7 @@ int main(void)
             break;
         else
             std::cout << "Command not found, please read the menu above!!" << std::endl;
+        std::cout << "> ";
     }
+    return (0);
 }

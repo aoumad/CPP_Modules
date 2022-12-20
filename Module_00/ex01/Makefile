@@ -1,30 +1,26 @@
-NAME	= ./phonebook
-	
-CC		= c++
+NAME = phonebook
+
+SRC		=	contact.cpp phonebook.cpp
+
+CC 		= c++
+
 FLAGS	= -std=c++98 -Wall -Wextra -Werror 
-RM		= rm -rf
 
-GREEN		=	\e[92;5;118m
-YELLOW		=	\e[93;5;226m
-GRAY		=	\e[33;2;37m
-RESET		=	\e[0m
-CURSIVE		=	\e[33;3m
+OBJS 	= $(SRC:.c=.o)
 
-.PHONY: all clean re
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(SRC) -o $(NAME)
 
-all: $(NAME)
+all: $(NAME) $(OBJS)
 
-$(NAME): 
-	@printf "$(CURSIVE)$(GRAY) 	- Compiling $(NAME)... $(RESET)\n"
-	@ $(CC) $(FLAGS) contact.cpp phonebook.cpp -o $(NAME)
-	@printf "$(GREEN)    - Executable ready.\n$(RESET)"
+%.o: %.c
+		$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(NAME)
-	@printf "$(YELLOW)    - Executable removed.$(RESET)\n"
+	rm -rf $(NAME)
 
-fclean:
-	@$(RM) $(NAME)
-	@printf "$(YELLOW)    - Executable removed.$(RESET)\n"
+fclean: clean
 
-re: clean all
+re: fclean all
+
+.PHONY: all clean fclean re
