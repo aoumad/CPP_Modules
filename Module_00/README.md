@@ -111,3 +111,147 @@ int main() {
 }
 ```
 - In this example, we use the `<<` operator to write a message to the `std::cout` output stream, which sends the message to the console. The `std::endl` manipulator is used to insert a newline character at the end of the message.
+
+## Class and Instances
+
+<!-- ## Member attributes & functions -->
+- A class is a user-defined type that represents a collection of data and functions (also known as methods) that operate on that data. A class definition specifies the data and functions that are associated with a class, but does not create any actual objects of the class.
+
+- To create an object of a class, you can use the class name followed by parentheses (()). This is called creating an instance of the class, or simply an instance. For example:
+    
+ ```C++
+#include <iostream>
+
+class MyClass {
+   // class data and functions go here
+};
+
+int main() {
+   MyClass instance; // create an instance of MyClass
+   return 0;
+}
+```
+    
+- The data and functions that are defined within a class are known as members of the class. The data members represent the state of an object, while the functions (methods) represent the behavior of an object.
+
+For example, consider the following class definition:
+```C++
+class Person {
+   std::string name;
+   int age;
+public:
+   void setName(std::string n) { name = n; }
+   void setAge(int a) { age = a; }
+   std::string getName() { return name; }
+   int getAge() { return age; }
+};
+```
+- This class defines a `Person` type, which has two data members: `name` and `age`. It also has four methods: `setName`, `setAge`, `getName`, and `getAge`, which allow you to set and get the values of the `name` and `age` data members.
+- To create an instance of the `Person` class and use its methods, you can do the following:
+    ```C++
+    int main() {
+   Person p;
+   p.setName("Alice");
+   p.setAge(30);
+   std::cout << p.getName() << " is " << p.getAge() << " years old." << std::endl;
+   return 0;
+    }
+    ```
+    > This will output the following to the console:
+    ```C++
+    Alice is 30 years old.
+    ```
+ 
+- In C++, you can also define a class using a struct, which is similar to a class but with all members defaulting to public access (we are not suppossed to work it struct in this module, but still good to know about struct in OOP). For example:
+    
+    ```C++
+    struct MyStruct {
+   // struct data and functions go here
+    };
+    ```
+- The main difference between a class and a struct is the default accessibility of their members. In a class, the members are private by default, while in a struct they are public by default.
+    
+## This pointer
+- In C++, the this pointer is a special pointer that holds the address of the current object. It is automatically defined and passed to class methods when they are called, and it can be used to refer to the object itself within the method.
+
+- The this pointer is typically used to distinguish between a class data member and a local variable with the same name, or to pass the object as an argument to a member function.
+
+Here is an example of how to use the this pointer in a class method:
+```C++
+#include <iostream>
+
+class MyClass {
+   int x;
+public:
+   MyClass(int x) : x(x) {}
+   void printX() {
+      std::cout << this->x << std::endl; // prints the value of the x data member
+   }
+};
+
+int main() {
+   MyClass obj(5);
+   obj.printX(); // outputs 5
+   return 0;
+}
+```
+- In this example, the `MyClass` class has a single data member `x` and a method `printX`that prints the value of `x` to the console. The `printX` method uses the `this` pointer to access the `x` data member of the object, rather than a local variable named `x`.
+
+You can also use the `this` pointer to pass the object as an argument to another member function. For example:
+
+```C++
+#include <iostream>
+
+class MyClass {
+   int x;
+public:
+   MyClass(int x) : x(x) {}
+   void setX(int x) { this->x = x; }
+   void printX() {
+      std::cout << x << std::endl; // prints the value of the x data member
+   }
+};
+
+int main() {
+   MyClass obj(5);
+   obj.setX(10);
+   obj.printX(); // outputs 10
+   return 0;
+}
+```
+- In this example, the setX method sets the value of the x data member using the this pointer. The printX method then prints the updated value of x.
+
+- It's important to note that the this pointer is only available within the body of a non-static member function. It is not available within the body of a static member function, or outside the class.
+    
+## Initialization list
+
+- the initialization list is a feature that allows you to specify the initial values for the member variables of a class when you create an object of that class. It is typically used in the constructor of the class.
+Here is an example of a class with a constructor that uses an initialization list:
+```C++
+class Point
+{
+private:
+    int x;
+    int y;
+
+public:
+    Point(int x, int y) : x(x), y(y)
+    {
+        // Body of the constructor
+    }
+};
+```
+    
+    
+- In the above example, the constructor of the `Point` class has two parameters, `x` and `y`, which correspond to the member variables of the same name. The initialization list appears after the colon (`:`) and specifies the initial values for the member variables.
+
+Using an initialization list has several benefits:
+    
+- 1- It allows you to initialize the member variables with values that are different from the values            passed to the constructor. For example, you could initialize `x` and `y` to 0 even if the                  constructor receives different values.
+    
+- 2- It can improve the performance of your code. When you use an initialization list, the member v                 variables are initialized directly, rather than being assigned a value after they have already              been constructed. This can be more efficient, especially if the member variables are large                  objects.
+    
+- 3- It allows you to initialize the member variables in any order, regardless of the order in which                they are declared in the class.
+    
+> **Note**
+> It is important to note that the initialization list must always come before the body of the                      constructor. If you try to initialize the member variables in the body of the constructor, the              compiler will give an error.
