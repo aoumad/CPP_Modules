@@ -10,27 +10,27 @@ Contact::~Contact()
     std::cout << "Contact destructor has been called" << std::endl;
 }
 
-std::string Contact::get_first_name()
+std::string Contact::get_first_name() const
 {
     return (this->_first_name);
 }
 
-std::string Contact::get_last_name()
+std::string Contact::get_last_name() const
 {
     return (this->_last_name);
 }
 
-std::string Contact::get_nickename()
+std::string Contact::get_nickename() const
 {
     return (this->_nickename);
 }
 
-std::string Contact::get_phone_number()
+std::string Contact::get_phone_number() const
 {
     return (this->_phone_number);
 }
 
-std::string Contact::get_darkest_secret()
+std::string Contact::get_darkest_secret() const
 {
     return (this->_darkest_secret);
 }
