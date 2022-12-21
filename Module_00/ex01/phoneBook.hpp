@@ -9,7 +9,6 @@ class Phonebook
 private:
     Contact _contacts[8];
     int    _index;
-    int    _contact_amount;
 
 public:
     Phonebook();

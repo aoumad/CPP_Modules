@@ -2,12 +2,10 @@
 
 Contact::Contact()
 {
-    std::cout << "Contact constructor has been called" << std::endl;
 }
 
 Contact::~Contact()
 {
-    std::cout << "Contact destructor has been called" << std::endl;
 }
 
 std::string Contact::get_first_name() const
@@ -41,7 +39,12 @@ int Contact::set_first_name(std::string first_name)
         return (1);
     for (size_t i = 0; i < first_name.size(); i++)
         if (!isalpha(first_name[i]))
-            return (1);
+        {
+            if (isspace(first_name[i]))
+                continue;
+            else
+                return (1);
+        }
     if (first_name.length() > 10)
     {
         first_name[9] = '.';
@@ -57,7 +60,12 @@ int Contact::set_last_name(std::string last_name)
         return (1);
     for (size_t i = 0; i < last_name.size(); i++)
         if (!isalpha(last_name[i]))
-            return (1);
+        {
+            if (isspace(last_name[i]))
+                continue;
+            else
+                return (1);
+        }
     if (last_name.length() > 10)
     {
         last_name[9] = '.';
@@ -73,7 +81,12 @@ int Contact::set_nickename(std::string nickename)
         return (1);
     for (size_t i = 0; i < nickename.size(); i++)
         if (!isalpha(nickename[i]))
-            return (1);
+        {
+            if (isspace(nickename[i]))
+                continue;
+            else
+                return (1);
+        }
     if (nickename.length() > 10)
     {
         nickename[9] = '.';
@@ -87,11 +100,9 @@ int Contact::set_phone_number(std::string phone_number)
 {
     if (phone_number == "")
         return (1);
-    phone_number.erase(0, phone_number.find_first_not_of('0'));
-    if (phone_number == "")
-        return (1);
+
     for (size_t i = 0; i < phone_number.size(); i++)
-        if (!isalnum(phone_number[i]))
+        if (!isdigit(phone_number[i]))
             return (1);
     if (phone_number.length() > 10)
     {
@@ -106,9 +117,6 @@ int Contact::set_darkest_secret(std::string darkest_secret)
 {
     if (darkest_secret == "")
         return (1);
-    for (size_t i = 0; i < darkest_secret.size(); i++)
-        if (!isalpha(darkest_secret[i]))
-            return (1);
     if (darkest_secret.length() > 10)
     {
         darkest_secret[9] = '.';
