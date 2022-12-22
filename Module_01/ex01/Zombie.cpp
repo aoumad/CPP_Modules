@@ -2,12 +2,12 @@
 
 Zombie::Zombie()
 {
-    std::cout << "Constructor has been called" << std::endl;
+    // std::cout << "Constructor has been called" << std::endl;
 }
 
 Zombie::~Zombie()
 {
-    std::cout << "The zombie " << this->_name << "got destructured" << std::endl;
+    // std::cout << "The zombie " << this->_name << "got destructured" << std::endl;
 }
 
 void    Zombie::announce(void)

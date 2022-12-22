@@ -1,29 +1,44 @@
 #include "replace.hpp"
+#include <fstream>
 
 int main(int argc, char **argv)
 {
-    if (argc == 4)
+    Replace obj;
+    // Check if the correct number of arguments have been passed
+    if (argc != 4)
     {
-        std::string s = argv[1];
-        std::string content;
-        std::ifstream ifs = ifstream(s, ios_base::in);
-        std::ofstream ofs;
-        if (ifs.fail())
-        {
-            std::cerr("run time error while reading!!");
-            return (1);
-        }
-        std::getline(ifs, content, '\0');
-        ifs.close();
-        content = ft_replace(content, argv[2], argv[3]);
-        ofs.open(name + ".replace");
-        ofs << content;
-        ofs.close();
+        std::cerr << "Error: Incorrect number of arguments" << std::endl;
+        return 1;
     }
-    else
+
+    // Open the input file
+    std::ifstream ifs(argv[1]);
+    if (!ifs.is_open())
     {
-        std::cerr << "The inputs you have entered are structurally wrong!!" << std::endl;
-        return (1);
+        std::cerr << "Error: Unable to open input file" << std::endl;
+        return 1;
     }
-    return (0);
+
+    // Perform the string replacement
+    std::string result;
+    std::string from = argv[2];
+    std::string to = argv[3];
+
+    std::getline(ifs, result, '\0');
+    ifs.close();
+
+    result = obj.ft_replace(result, from, to);
+    // Open the output file
+    std::ofstream ofs(argv[1] + std::string(".replace"));
+    if (!ofs.is_open())
+    {
+        std::cerr << "Error: Unable to open output file" << std::endl;
+        return 1;
+    }
+
+    // Write the modified string to the output file
+    ofs << result;
+    ofs.close();
+
+    return 0;
 }
