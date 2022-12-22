@@ -10,9 +10,6 @@ int main(void)
     std::cout << "The name of the heap zombie 🧟‍♀️: ";
     std::cin >> heap_name;
 
-    // Zombie zombie_stack;
-    // zombie_stack.name_setter(stack_name);
-    
     Zombie *zombie_heap = newZombie(heap_name);
     zombie_heap->announce();
     delete zombie_heap;

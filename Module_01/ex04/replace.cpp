@@ -12,9 +12,10 @@ Replace::~Replace()
 
 std::string Replace::ft_replace(std::string content, std::string s1, std::string s2)
 {
+    if (s1.empty())
+        return (content);
     // Find position of string s1
     size_t  index = content.find(s1);
-
     // Check if position is -1 or not
     while(index != std::string::npos)
     {
