@@ -2,8 +2,8 @@
 
 - [New and delete](#new-and-delete)
 - [Stack vs heap memory](#stack-vs-heap-memory)
-- [Pointers](#pointers)
-- [References](#references)
+- [Reference vs dereference](#reference-vs-dereference)
+- [](#references)
 - [Lifetime](h#lifetime)
 - [Scope](#scope)
 - [Constant class instance in another class](#constant-class-instance-in-another-class)
@@ -63,3 +63,57 @@ There are several key differences between the stack and the heap:
   - Allocation: Memory on the stack is automatically allocated and deallocated by the system, while memory on the heap must be dynamically allocated and deallocated by the program.
 
   - Speed: Accessing and manipulating data on the stack is generally faster than accessing and manipulating data on the heap, because the stack is managed by the system and the memory is contiguous. The heap, on the other hand, is managed by the program and may contain fragments of unused memory.
+  
+## Reference vs dereference
+In C++, references and pointers are both used to refer to the memory address of a variable, but they have some key differences that you should be aware of.
+ ### References
+ - A reference in C++ is a way to refer to the memory address of a variable without using a pointer. You can create a reference by using the `&` operator to get the address of a variable, and then using the `&` operator again to create a reference to that address.
+ 
+ Here is an example of how to create a reference in C++:
+ ```C++
+int x = 5;
+int&y = x;
+ ```
+ 
+ - In this example, the `y` reference is created to refer to the memory address of the `x` variable. That means any changes made to the `y` reference will be reflected in the `x` variable, because they both refer to the same memory address.
+ - References are often used as function parameters to pass variables by reference, rather than by value. This allows you to modify the original variable within the function, rather than creating a copy of the variable and modifying the copy.
+ 
+ Here is an example of a function that uses a reference parameter:
+ ```C++
+ void increment(int& number) {
+  number++;
+    }
+ ```
+
+In this example, the `increment()` function takes a reference to an integer as a parameter, When the function is called, it increments the value of the integer by 1. Because the parameter is a reference, any changes made to the parameter within the function are reflected in the original variable.
+
+### Pointers
+ A pointer in C++ is a variable that stores the memory address of another variable.
+ - You can create a pointer by using the `*` operator to declare a pointer variable, and the using the `&` operator to get the addresss of a variable.
+ 
+ Here is an example of how to create a pointer in C++:
+ 
+ ```C++
+ int x = 5;
+ int *p = &x;
+ ```
+ In this example, the `p` pointer is created to store the memory address of the `x` variable. You can use the dereference operator `*` to access the value stored at the memory address pointed to - by the pointer.
+ - Pointers are often used to dynamically allocate memory on the heap, using the `neew` and `delete` operators. They are also often used to pass variables by reference, similar to references.
+ 
+ Here is an example of a function that uses a pointer parameter:
+ ```C++
+ void   increment(int   *number)
+    (*number)++;
+ ```
+ In this example the `increment()` function takes a pointer to an integer as a parameter. When the function is called, it increments the value of the integer by 1 using the dereference operator `*`.
+ 
+ ### Key Differences
+ 
+ There are many differences between references and pointers that you should be aware of:
+    - References must be initialized when they are created, and they cannot be changed to refer to a different memory address after they are created. Pointers, on the other hand, ca be initialized later and can be changed to refer to a different memory address using the assignement operator `=`.
+    - References are generally easier to use and less error-prone than pointers, because you do not have to worry about allocating and deallocating memory or about the possibility of a null pointer. Pointers, on the other hand, require more careful management and can be a source of bugs if they are not used correctly.
+    - References are safer to use than pointers, because they cannot be null a. Pointers, on the other hand, can be null and can be changed to refer to a different memory address, which can lead to bugs if the pointer is not properly initialized or if the pointer is not checked for null before it is derefenced.
+    - References are often more efficient than pointers, because they do not require the extra level of indirection involved in derefencing a pointer. However, this difference in efficiency is usually small and is not usually a significant factor in most programs.
+    - References cannot be used to refer to an array of elements, because an array decays into a pointer to it's first element when it is passed as an argument to a function. Pointers, on the other hand, can be used to refer to an array of elements or to perform pointer arithmetic.
+    
+    In general, you should use references when you want to pass a variable by reference or when you want to refer to an object without using a pointer. You should use pointers when you need to dynamically allocate memory on the heap or when you need to perform pointer arithmetic.
