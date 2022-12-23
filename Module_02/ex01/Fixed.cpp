@@ -1,23 +1,23 @@
 #include "Fixed.hpp"
 
-Class::Fixed() : _fixed_point(0)
+Fixed::Fixed() : _fixed_point(0)
 {
     std::cout << "Default constructor called" << std::endl;
 }
 
-Class::Fixed(const int num)
+Fixed::Fixed(const int num)
 {
     std::cout << "Int constructor called" << std::endl;
     this->_fixed_point = (num << this->_nFractBits);
 }
 
-Class:Fixed(const float num)
+Fixed::Fixed(const float num)
 {
     std::cout << "Float constructor called" << std::endl;
     this->_fixed_point = std::roundf(num * (1 << this->_nFractBits));
 }
 
-Class::Fixed(const Fixed& other)
+Fixed::Fixed(const Fixed& other)
 {
     std::cout << "Copy constructor called" << std::endl;
     *this = other;
@@ -31,7 +31,7 @@ Fixed&  Fixed::operator = (const Fixed& other)
     return (*this);
 }
 
-Class::~Fixed()
+Fixed::~Fixed()
 {
     std::cout << "Destructor called" << std::endl;
 }
