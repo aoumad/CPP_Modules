@@ -121,3 +121,47 @@ Here is an example of a class that follows the OCF pattern in C++:
         void setY(int y);
   };
 ```
+## Copy constructor
+
+In C++, a copy constructor is a special constructor that is used to create a new object by copying an existing object. It is a member function with the following signature:
+
+```C++
+class_name(const class_name& other);
+```
+> **Note**
+> If you saw some blogs write instead of `other` ; `rhs` it stands for `right hand side` :)
+
+The copy constructor takes a reference to an object of the same class as the constructor and creates a new object that is a copy of the original object.
+
+Copy constructor are typically used when an object is passed by value as an argument to a function, or when an object is returned by a function. In these cases, the object needs to be copied in order to preserve it's value and prevent any changes to the original object from affecting the copy.
+
+Here is an example of a class with a copy constructor:
+```C++
+  class MyClass
+  {
+    private:
+      int _value;
+    public:
+      // Default constructor
+      Myclass(int value) : _value(value) {}
+
+      //Copy constructor
+      Myclass(const Myclass& other) : _value(other._value) {}
+  }
+```
+
+In this example, the `MyClass` class has a single member variable `_value` and a constructor that initializes it with a given value. The copy constructor takes a reference to another `MyClass` object and creates a new object with the same value as the original object.
+
+- Copy constructors are useful in cases where you want to create a new object that is a copy of an existing object, but you don't want to modify the original object. For example, consider the following code:
+
+```C++
+  MyClass obj1(10);
+  MyClass obj2(obj1); // obj2 is a copy of obj1
+```
+
+- In this code, the `obj2` object is created using the copy constructor, which creates a new object with the same value as `obj1`. The original object `obj1` is not modified.
+- It's important to note that the copy constructor is only called when an object is copied by value. If an object is passed by reference or pointer, the copy constructor is not called and the original object is used directly.
+- By default, C++ provides a default copy constructor for classes that does a member-wise copy of the object's data members. However, you can define your own copy constructor if you need to perform a more complex copy operation, such as deep copying of dynamically allocated memory or resources.
+- In the Orthodox Canonical Form (OCF), the copy constructor is used to create a new exception object that is a copy of an existing exception object. This allows exception objects to be passed by value and preserves their state, while still allowing the original object to be modified or destroyed without affecting the copy.
+- Any changes you will make in the obj you created using a copy constructor won't obviously affect the original obj ; this is because the copy constructor creates a new object that is a copy of the original object, and the two objects are independent of each other.
+
