@@ -2,6 +2,7 @@
 
 - [Polymorphism](#polymorphism)
 - [Inheritance](#inheritance)
+- [Access specifier](#access-specifier)
 
 ## Polymorphism
 
@@ -40,3 +41,19 @@ Here is an example of inheritance in C++:
     return 0;
   }
 ```
+In this example, the `Animal` class has a `makeNoise` method that outputs a generic animal noise. The `Dog` class is derived from the `Animal` class and has its own version of the `makeNoise` method that outputs a specific dog noise. When we create an instance of the `Dog` class and call the `makeNoise` method on it, the `Dog` class's version of the method is called instead of the `Animal` class's version. This is an example of method overriding, which is a key feature of dynamic polymorphism.
+
+Inheritance has several benefits in C++:
+  - It allows you to reuse existing code and avoid duplicating functionality.
+  - It allows you to create a hierarchy of classes, where a subclass can inherit the properties and behaviors of its superclass and add its own unique features.
+  - It allows you to create a common interface for a group of related classes, which makes it easier to work with these classes in your code.
+
+## Access specifier
+
+In C++, access specifiers are keywords that determine the accessibility of class members (i.e., data members and member functions) from outside the class. There are three access specifiers in C++:
+
+  - 1- `public`: Class members that are declared as public can be accessed from anywhere within the program, both inside and outside the class.
+  - 2- `private`: Class members that are declared as private can only be accessed from within the class itself. They are not accessible from outside the class, even by derived classes.
+  - 3- `protected` : Class members that are declared as protected can be accessed from within the class and from any derived classes, but they are not accessible from outside the class hierarchy.
+
+![alt text](https://github.com/aoumad/Netpractice/blob/main/images/access_specifiers.png)
