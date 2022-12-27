@@ -4,9 +4,11 @@
 int main()
 {
     ScavTrap scav("Odin");
-    scav.attack("target");
-    scav.takeDamage(10);
-    scav.beRepaired(10);
-    scav.guardGate();
+    ScavTrap scav2("Floki");
+    ScavTrap scaav = scav;
+    scav.attack("Floki");
+    scav2.takeDamage(500);
+    scav2.beRepaired(10);
+    scav2.guardGate();
     return 0;
 }
