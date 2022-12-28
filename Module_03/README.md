@@ -8,7 +8,7 @@
 
 In C++, there are two types of polymorphism:
 
-  - Static polymorphism: This type of polymorphism is the one we saw in the previous modules, and is achieved through function overloading, which is the ability of a class to have multiple functions with the same name but different signatures. Function overloading allows you to define multiple versions of a function that can be called with different sets of parameters, and the correct version will be chosen based on the number and type of arguments passed to the function.
+  - Static polymorphism: also known as compile-time polymorphism, refers to the ability of a program to determine the type of an object or function at compile-time, based on the template parameters. It is achieved through templates in C++ (we will talk about it in detailed way in Module_07)
   - Dynamic polymorphism : This type of polymorphism is achieved through `inheritance` and `virtual functions` (we will discuss the concept of virtual functions in the following modules), but what is the Inheritance?
 
 ## Inheritance
