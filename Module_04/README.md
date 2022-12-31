@@ -181,3 +181,44 @@ int main()
 
 It is important to note that an interface is similar to an abstract class, but it can only contain pure virtual functions and no implementation. This means that an interface is not meant to be used as a base class for derived classes, rather it meant to be a way to specify a set of behaviors that a class must implement.
 
+## shallow copy vs deep Copy
+
+In C++, a shallow copy is a copy of an object that creates a new object with a reference to the same memory as the original object. This means that any changes made to the original object will be reflected in the copied object, as they both refer to the same memory location.
+
+On the other hand, a deep copy is a copy of an object that creates a new object with it's own memory separate from the original object. This means that any changes made to the orignal object will not be reflected in the copied object, as they have their own separate memory location.
+
+To create a shallow copy in C++, you can simply use the assignement operator `=` to copy one object to another, For example:
+
+```C++
+Myclass obj1;
+Myclass obj2 = obj1;
+```
+
+This will create a new object `obj2` that has the same values as `obj1`, but both objects will refer to the same memory location.
+
+To create a deep copy in C++, you can write a copy contructor or a copy assignement operator that manually creates a new object and copies all the data from the original object to the new object.
+
+Here is an example of a copy constructor that creates a deep copy constructor of an object:
+
+```C++
+    class MyClass
+    {
+          public:
+              MyClass(const MyClass& other) {
+                  // Copy data from the original object to this object
+                  this->data = other.data;
+              }
+          private:
+              int data;
+     };
+```
+
+then using it like this:
+
+```C++
+  Myclass obj1;
+  Myclass obj2(obj1);
+```
+
+It is important to understand the difference between shallow and deep copies, as they can have different behaviors and can lead to unintended consequences if no used correctly. In general, it is a good idea to use deep copies when working with complex objects that have dynamically allocated memory or when you want to create completely independent copy of an object.
+
