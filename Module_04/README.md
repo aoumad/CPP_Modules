@@ -66,3 +66,5 @@ Here's how it works:
   - 2- The vtable is stored in memory in a predefined location, and it's address is stored in a special pointer called the vptr.
   - 3- The vptr is a hidden member of the class, and it's initialized by the constructor of the class to point to the vtable of the class.
   - 4- When a virtual function is called on a object, the compiler generates code to first look up the function pointer in the vtable and call function through the function pointer.
+
+This means that when a virtual function is called on an object, the function that is actually called is determined at runtime, based on the type of the object. If the object i an instance of the base class, the function in the base class's vtable will be called. If the derived class has overriden the virtual funtion, the function in the base class's vtable will be called.
