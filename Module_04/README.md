@@ -6,9 +6,8 @@
 - [interface && pure virtual functions](#interface--pure-virtual-functions-virtual-keyword---0)
 - [shallow vs deep Copies](#shallow-vs-deep-copies)
 <!-- - [coplien form](https://github.com/achrafelkhnissi/CPP-Modules/wiki/Module04#coplien-form) -->
-- [virtual member function](#virtual-member-function)
-- [virtual destructor](#virtual-destructor)
-- [label virtual](#label-virtual)
+<!-- - [virtual destructor](#virtual-destructor)
+- [label virtual](#label-virtual) -->
 
 ## Subtyping polymorphism
 
