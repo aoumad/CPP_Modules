@@ -3,8 +3,7 @@
 - [virtual functions](#virtual-functions-virtual-keyword)
 - [mechanism of vitual functions && vptr && vtable](#mechanism-of-vitual-functions-&&-vptr-&&-vtable)
 - [abstract classes](#abstract-classes)
-- [polymorphism](#polymorphism)
-- [interface & pure virtual functions](#interface--pure-virtual-functions-virtual-keyword---0)
+- [interface && pure virtual functions](#interface--pure-virtual-functions-virtual-keyword---0)
 - [shallow vs deep Copies](#shallow-vs-deep-copies)
 <!-- - [coplien form](https://github.com/achrafelkhnissi/CPP-Modules/wiki/Module04#coplien-form) -->
 - [virtual member function](#virtual-member-function)
@@ -126,3 +125,59 @@ delete shape_ptr; // OK
 ```
 
 In this example, `shape_ptr` and `shape_ref` are pointers and references to the `Shape` class, respectively, but they point to objects of the `Rectangle` class. This allows you to use the `area` function of the `Rectangle` class throught the `shape_ptr` and `shape_ref` variables, even though they are of type `Shape`.
+
+
+## Interface && pure virtual functions
+
+In C++, an interface is a class that contains only pure virtual functions and no implementation. An interface specifies a set of behaviors or functions that a class must implement, but it does not provide any implementation for those functions.
+
+An interface is similar to an abstract class in that it defines a set of functions that must be implemented by derived classes, but it differs in that it can only contain pure virtual functions and no implementation. This means that an interface cannot contain any member variables or non-virtual functions.
+
+Here is an example in C++:
+
+```C++
+  class Shape
+  {
+   public:
+    // Pure virtual function. Derived classes must implement this function.
+    virtual double getArea() = 0;
+
+    // Pure virtual function. Derived classes must implement this function.
+    virtual double getPerimeter() = 0;
+};
+```
+
+To use this interface, you would define a derived class that implements the pure virtual functions:
+
+```C++
+    class Circle : public Shape {
+     public:
+      Circle(double radius) : radius_(radius) {}
+
+      double getArea() override {
+        return 3.14 * radius_ * radius_;
+      }
+
+      double getPerimeter() override {
+        return 2 * 3.14 * radius_;
+      }
+
+     private:
+      double radius_;
+    };
+```
+
+You can then create an object of the derived class and call it's "getArea()" and "getPerimeter()" functions:
+
+```C++
+int main()
+{
+  Circle myCircle(5);
+  std::cout << "Area: " << myCircle.getArea() << std::endl;  // Outputs: "Area: 78.5"
+  std::cout << "Perimeter: " << myCircle.getPerimeter() << std::endl;  // Outputs: "Perimeter: 31.4"
+  return 0;
+}
+```
+
+It is important to note that an interface is similar to an abstract class, but it can only contain pure virtual functions and no implementation. This means that an interface is not meant to be used as a base class for derived classes, rather it meant to be a way to specify a set of behaviors that a class must implement.
+
