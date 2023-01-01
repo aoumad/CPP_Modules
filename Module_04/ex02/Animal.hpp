@@ -1,3 +1,5 @@
+// ABSTRACT CLASS
+
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
@@ -6,16 +8,16 @@
 
 class Animal
 {
-protected:
-    std::string type;
-public:
-    Animal();
-    Animal(const Animal& other);
-    Animal& operator= (const Animal& other);
-    virtual ~Animal(void);
-
-    virtual void    makeSound() const;
-    std::string getType() const;
+    protected:
+        std::string type;
+    public:
+        Animal();
+        Animal(const Animal &copy);
+        Animal &operator=(const Animal &copy);
+        virtual ~Animal();
+        std::string getType() const;
+        virtual void makeSound() const;
+        virtual void    useless() = 0; // now by law we have an abstract clas eheheh
 };
 
 #endif
