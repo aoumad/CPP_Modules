@@ -31,7 +31,7 @@ Cat::~Cat()
     std::cout << "Cat destructor called" << std::endl;
 }
 
-void Cat::makeSound() const
+void Cat::makeSound()
 {
     std::cout << "Cat sound" << std::endl;
     delete _catbrain;

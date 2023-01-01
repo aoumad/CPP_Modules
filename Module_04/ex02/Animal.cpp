@@ -11,15 +11,13 @@ Animal::Animal(const Animal& other)
     std::cout << "Copy Animal constructor called" << std::endl;
 }
 
-Animal& Animal::operator= (const Animal& other)
+Animal& Animal::operator= (const Animal& copy)
 {
-    this->type = other.type;
-
-    std::cout << "Animal assignement operator called" << std::endl;
+    std::cout << "Animal assignation operator called" << std::endl;
+    if (this != &copy)
+        this->type = copy.type;
+    return (*this);
 }
-
-void    Animal::makeSound() const
-{}
 
 std::string Animal::getType() const
 {
