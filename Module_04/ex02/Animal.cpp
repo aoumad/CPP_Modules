@@ -11,6 +11,11 @@ Animal::Animal(const Animal& other)
     std::cout << "Copy Animal constructor called" << std::endl;
 }
 
+Animal::~Animal()
+{
+    std::cout << "Animal destructor called" << std::endl;
+}
+
 Animal& Animal::operator= (const Animal& copy)
 {
     std::cout << "Animal assignation operator called" << std::endl;
