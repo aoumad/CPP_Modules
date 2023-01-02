@@ -20,8 +20,7 @@ Cat &Cat::operator=(const Cat &copy)
     {
         this->type = copy.type;
         delete this->_catbrain;
-        this->_catbrain = new Brain();
-        *this->_catbrain = *copy._catbrain;
+        this->_catbrain = new Brain(*copy._catbrain);
     }
     return (*this);
 }
@@ -29,10 +28,10 @@ Cat &Cat::operator=(const Cat &copy)
 Cat::~Cat()
 {
     std::cout << "Cat destructor called" << std::endl;
+    delete _catbrain;
 }
 
 void Cat::makeSound() const
 {
     std::cout << "Cat sound" << std::endl;
-    delete _catbrain;
 }

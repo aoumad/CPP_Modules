@@ -3,6 +3,7 @@
 Animal::Animal()
 {
     std::cout << "Animal constructor called" << std::endl;
+    this->type = "Animal";
 }
 
 Animal::Animal(const Animal &copy)

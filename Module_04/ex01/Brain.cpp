@@ -4,7 +4,7 @@ Brain::Brain()
 {
     std::cout << "Brain constructor called" << std::endl;
     for (int i = 0; i < 100; i++)
-        this->_ideas[i] = "";
+        this->_ideas[i] = "idea";
 }
 
 Brain::Brain(const Brain &copy)
