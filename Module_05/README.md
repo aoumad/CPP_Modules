@@ -38,5 +38,10 @@ To catch an exception, you can use a try-catch block:
 ```C++
 try
 {
-
+  // code that may throw an exception
+}
+catch
+{
+  // handle the exception
+}
 ```
