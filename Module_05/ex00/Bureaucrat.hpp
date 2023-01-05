@@ -1,43 +1,46 @@
 #ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+# define BUREAUCRAT_HPP
 
-#include <iostream>
-#include <exception>
+# include <iostream>
+# include <exception>
+# include <string>
 
 class Bureaucrat
 {
-private:
-    const std::string   _name;
-    int                 _grade;
-public:
-    Bureaucrat();
-    Bureaucrat(std::string const &name, int grade);
-    Bureaucrat(const Bureaucrat& other);
-    Bureaucrat& operator= (const Bureaucrat& other);
-    ~Bureaucrat();
+    private:
+        std::string const   _name;
+        int                 _grade;
+    public:
+        Bureaucrat();
+        Bureaucrat(std::string name, int grade);
+        Bureaucrat(Bureaucrat const & src);
+        ~Bureaucrat();
+        Bureaucrat&    operator=(const Bureaucrat &rhs);
 
-    std::string getName(void) const;
-    int         getGrade(void) const;
+        std::string   getName() const;
+        int           getGrade() const;
 
-    void                 gradeUp(void);
-    void                 gradeDown(void);
+        void          incrementGrade();
+        void          decrementGrade();
 
-    class GradeTooHighException:: public std::exception
-    {
-        public:
-            virtual const char* what() const throw()
-            {
-                return ("You overrated the grade, which is limites in the range [1, 150]");
-            }
-    };
-    class GradeTooLowException:: public std::exception
-    {
-        public:
-            virtual const char* what() const throw()
-            {
-                return ("You underrated the grade, which is limites in the range [1, 150]")
-            }
-    };
+        class GradeTooHighException : public std::exception
+        {
+            public:
+                virtual const char* what() const throw();
+                // {
+                //     return ("You overrated the grade, which is limited in the range [1, 150]");
+                // }
+        };
+        class GradeTooLowException : public std::exception
+        {
+            public:
+                virtual const char* what() const throw();
+                // {
+                //     return ("You underrated the grade, which is limited in the range [1, 150]");
+                // }
+        };
 };
+
+std::ostream &  operator<<(std::ostream & o, Bureaucrat const & rhs);
 
 #endif

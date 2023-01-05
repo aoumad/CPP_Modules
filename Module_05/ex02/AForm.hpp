@@ -27,6 +27,9 @@ class Form
             int         getGradeToExecute() const;
             void        setSigned(bool sign);
 
+            // we should make it as an abstract class
+            virtual void        execute(Bureaucrat const & executor) const = 0;
+
             class GradeTooHighException : public std::exception
             {
                 public:

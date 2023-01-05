@@ -2,18 +2,28 @@
 
 int main(void)
 {
+    Bureaucrat b("Bureaucrat", 150);
+    std::cout << b << std::endl;
+
+    // try
+    // {
+    //     b.incrementGrade();
+    // }
+    // catch (std::exception & e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
+    // std::cout << b << std::endl;
+
+
     try
     {
-        Bureaucrat  obj("Bjorn Ironside", 1);
-
-        std::cout << obj << std::endl;
-
-        obj.gradeDown();
-        obj.gradeUp();
+        b.decrementGrade();
     }
-    catch(Bureaucrat::GradeTooHighException &e)
+    catch (std::exception & e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << std::endl;
     }
-    return (0);   
+    std::cout << b << std::endl;
+    return (0);
 }

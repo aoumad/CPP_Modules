@@ -5,14 +5,15 @@ Bureaucrat::Bureaucrat()
     std::cout << "Default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string const &name, int grade): _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
-    std::cout << "Parametrized Constructor called" << std::endl;
+    std::cout << "Constructor called" << std::endl;
+}
 
-    if (grade > 150)
-        throw Bureaucrat::GradeTooLowException();
-    else if (grade < 1)
-        throw Bureaucrat::GradeTooHighException();
+Bureaucrat::Bureaucrat(Bureaucrat const &src)
+{
+    std::cout << "Copy constructor called" << std::endl;
+    *this = src;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -20,37 +21,50 @@ Bureaucrat::~Bureaucrat()
     std::cout << "Destructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other): _name(other._name), _grade(other._grade)
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat &rhs)
 {
-    std::cout << "Copy constructor called" << std::endl;
-}
-
-Bureaucrat&  Bureaucrat::operator= (const Bureaucrat& other)
-{
-    this->_grade = other._grade;
+    std::cout << "Assignation operator called" << std::endl;
+    if (this != &rhs)
+        _grade = rhs.getGrade();
     return (*this);
 }
 
-std::string Bureaucrat::getName(void) const
+std::string Bureaucrat::getName() const
 {
     return (this->_name);
 }
 
-int Bureaucrat::getGrade(void)  const
+int Bureaucrat::getGrade() const
 {
     return (this->_grade);
 }
 
-void    Bureaucrat::gradeUp(void)
+void Bureaucrat::incrementGrade()
 {
-    if (_grade - 1 < 1)
+    if (this->_grade <= 1)
         throw Bureaucrat::GradeTooHighException();
-    _grade--;
+    this->_grade--;
 }
 
-void    Bureaucrat::gradeDown(void)
+void Bureaucrat::decrementGrade()
 {
-    if (_grade + 1 > 150)
+    if (this->_grade >= 150)
         throw Bureaucrat::GradeTooLowException();
-    _grade++;
+    this->_grade++;
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return ("You overrated the grade, which is limited in the range [1, 150]");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return ("You underrated the grade, which is limited in the range [1, 150]");
+}
+
+std::ostream &operator<<(std::ostream &o, Bureaucrat const &rhs)
+{
+    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
+    return (o);
 }
