@@ -1,22 +1,30 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+
 
 int main(void)
 {
-    Bureaucrat b1("B1", 1);
-    Bureaucrat b2("B2", 150);
-    Form f1("F1", 1, 1);
-    Form f2("F2", 150, 150);
+    Bureaucrat  *bureaucrat = new Bureaucrat("Bureaucrat", 1);
+    Form        *form = new PresidentialPardonForm("Form");
+    Form        *form2 = new RobotomyRequestForm("Form2");
+    Form        *form3 = new ShrubberyCreationForm("Form3");
 
-    std::cout << b1 << std::endl;
-    std::cout << b2 << std::endl;
-    std::cout << f1 << std::endl;
-    std::cout << f2 << std::endl;
+    std::cout << *bureaucrat << std::endl;
+    std::cout << *form << std::endl;
+    std::cout << *form2 << std::endl;
+    std::cout << *form3 << std::endl;
 
-    b1.signForm(f1);
-    b2.signForm(f2);
+    bureaucrat->signForm(*form);
+    bureaucrat->signForm(*form2);
+    bureaucrat->signForm(*form3);
 
-    std::cout << f1 << std::endl;
-    std::cout << f2 << std::endl;
+    bureaucrat->executeForm(*form);
+    bureaucrat->executeForm(*form2);
+    bureaucrat->executeForm(*form3);
+
+    delete bureaucrat;
     return (0);
 }

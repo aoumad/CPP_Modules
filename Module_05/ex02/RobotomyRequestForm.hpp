@@ -1,7 +1,7 @@
 #ifndef ROBOTOMYREQUESTFORM
 #define ROBOTOMYREQUESTFORM
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 class RobotomyRequestForm : public Form
 {

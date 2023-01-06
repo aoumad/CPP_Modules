@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat()
 {
@@ -77,6 +77,19 @@ void    Bureaucrat::signForm(Form &form)
         form.getSigned();
         std::cout << form.getName() << " signed" << std::endl;
         form.setSigned(true);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void    Bureaucrat::executeForm(Form const & form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << form.getName() << " executed" << std::endl;
     }
     catch(const std::exception& e)
     {

@@ -16,7 +16,7 @@ class Animal
         Animal &operator=(const Animal &copy);
         virtual ~Animal();
         std::string getType() const;
-        virtual void makeSound() = 0; // now by law we have an abstract clas eheheh
+        virtual void makeSound() const = 0; // now by law we have an abstract clas eheheh
 };
 
 #endif

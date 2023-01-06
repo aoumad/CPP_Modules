@@ -31,7 +31,7 @@ Cat::~Cat()
     delete _catbrain;
 }
 
-void Cat::makeSound()
+void Cat::makeSound() const
 {
     std::cout << "Cat sound" << std::endl;
 }

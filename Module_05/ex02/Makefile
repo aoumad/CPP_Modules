@@ -1,6 +1,7 @@
 NAME =  Bureaucrat
 
-SRC		=	Bureaucrat.cpp main.cpp Form.cpp
+SRC		=	Bureaucrat.cpp main.cpp AForm.cpp PresidentialPardonFor.cpp \
+			RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 
 CC 		= c++
 

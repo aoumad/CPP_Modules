@@ -32,5 +32,16 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-    
+    if (this->getSigned() == false)
+        throw Form::GradeTooLowException();
+    else if (executor.getGrade() > this->getGradeToExecute())
+        throw Form::GradeTooLowException();
+    else
+        std::cout << this->_target << " has been pardoned by Zafod Beeblebrox" << std::endl;
+}
+
+std::ostream &operator<<(std::ostream &out, const PresidentialPardonForm &pres)
+{
+    out << "Presidential Pardon Form: " << pres.getName() << ", grade to sign: " << pres.getGradeToSign() << ", grade to execute: " << pres.getGradeToExecute() << ", signed: " << pres.getSigned() << std::endl;
+    return out;
 }

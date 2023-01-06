@@ -31,7 +31,7 @@ Dog::~Dog()
     delete _dogbrain;
 }
 
-void Dog::makeSound()
+void Dog::makeSound() const
 {
     std::cout << "Dog sound" << std::endl;
 }
