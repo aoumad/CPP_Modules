@@ -1,5 +1,6 @@
 ## Table of contents
 - [Exception classes](#exception-classes)
+- [what() function](#what()-function)
 
 ## Exception classes
 
