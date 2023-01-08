@@ -1,6 +1,7 @@
 ## Table of contents
 - [subtyping polymorphism](#subtyping-polymorphism)
 - [virtual functions](#virtual-functions-virtual-keyword)
+- [object slicing](#object-slicing)
 - [mechanism of vitual functions && vptr && vtable](#mechanism-of-vitual-functions-&&-vptr-&&-vtable)
 - [abstract classes](#abstract-classes)
 - [interface && pure virtual functions](#interface--pure-virtual-functions-virtual-keyword---0)
@@ -53,6 +54,40 @@ Here is an example of subtype polymorphism and virtaul function using Inheritanc
 In the above example, the `Animal` class has a virtual function called `makeSound()` method that overrides the one in the base class.
 
 When we create an object of type `Animal()` and call the `makeSound()` method , it outputs the generic animal sound. But when we create a `Dog` object and call the same method through a pointer to the base class `Animal`, it outputs the sound specific to a dog, because the derivws class's method is called instead of the base class's method. This is known as dynamic dispatch or runtime polymorphism.
+
+## Object slicing
+
+Object slicing occurs when you assign an object of a derived class to a variable of a base class type. When this happens, the object is `sliced` , and only the base class portion of the object is copied into the variable. The derived class member variables and member functions are not copied, only the base class member variables and member functions are copied.
+
+```C++
+class Animal
+{
+public:
+  int age;
+  virtual void makeSound() { cout << "Some generic animal sound" << endl; }
+};
+
+class Dog : public Animal
+{
+public:
+  string breed;
+  void makeSound() { cout << "Woof!" << endl; }
+};
+
+int main()
+{
+  Dog dog;
+  dog.age = 5;
+  dog.breed = "Labrador";
+
+  Animal animal = dog;  // object slicing occurs here
+
+  cout << animal.age << endl;  // Outputs: 5
+  cout << animal.breed << endl;  // Error: Animal class does not have a 'breed' member variable
+
+  return 0;
+}
+```
 
 ## Mechanism of vitual functions && vptr && vtable
 
