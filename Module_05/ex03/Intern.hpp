@@ -8,14 +8,14 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-class Intern
+class Intern : public 
 {
     public:
         Intern();
         Intern(Intern const & src);
         ~Intern();
 
-        Intern & operator=(Intern cosnt & rhs);
+        Intern & operator=(Intern const & rhs);
 
         Form *makeForm(std::string const & formName, std::string const & target);
 };

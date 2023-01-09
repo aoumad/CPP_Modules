@@ -14,7 +14,9 @@ int main(void)
     std::cout << f2 << std::endl;
 
     b1.signForm(f1);
+    f1.beSigned(b1);
     b2.signForm(f2);
+    f2.beSigned(b2);
 
     std::cout << f1 << std::endl;
     std::cout << f2 << std::endl;
