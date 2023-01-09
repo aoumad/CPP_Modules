@@ -27,17 +27,11 @@ class Bureaucrat
         {
             public:
                 virtual const char* what() const throw();
-                // {
-                //     return ("You overrated the grade, which is limited in the range [1, 150]");
-                // }
         };
         class GradeTooLowException : public std::exception
         {
             public:
                 virtual const char* what() const throw();
-                // {
-                //     return ("You underrated the grade, which is limited in the range [1, 150]");
-                // }
         };
 };
 
