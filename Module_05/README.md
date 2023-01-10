@@ -1,5 +1,6 @@
 ## Table of contents
 - [Exception classes](#exception-classes)
+- [try](#try)
 - [what() function](#what()-function)
 
 ## Exception classes
@@ -46,6 +47,22 @@ catch
   // handle the exception
 }
 ```
+
+## Try
+
+A `try` block is used to enclose a sectio of code that may throw an exception. if an exception is thrown within the try block, the program will immediately jump to the corresponding `catch` block that can handle that type of exception.
+
+## catch
+
+A `catch` block is used to handle exception that was thrown within a try block. It takes an argument, which is the type of exception that it can handle, and it is executed when the exception is thrown.
+
+## Throw
+
+The `Throw` statement is used to throw an exception. It is typically used within a fucntion to indicate that an error can occured. When a throw statement is executed, the program will jump immediately jump out of the current function and look for a catch block that can handle the exception.
+
+When an exception is thrown the program immediately exits the current function and unwinds the call stack until it finds a catch block that can handle the exception. If the program does not find any catch block that can handle the exception, it will call the `std::terminate()` function which will immediately terminate the program and will lead to an abnormal program termination.
+
+The main advantage of using `try-catch` is that it allows the program to handle exceptions in a structured and predictable way, rather than having to rely on undefined behavior or return error codes.
 ## what() function
 
 ```C++
