@@ -25,19 +25,32 @@ Intern & Intern::operator=(Intern const & rhs)
     return *this;
 }
 
-// we shouldn't use if/else statements, instead we will use pointer to member function using typdef
-
-Form *Intern::makeForm(std::string const & formName, std::string const & target)
+Form *makeShrubberyCreationForm(std::string target)
 {
-    typedef Form *(Intern::*funcPtr)(std::string const & target);
-    funcPtr funcArray[3] = {&Intern::makeShrubberyCreationForm, &Intern::makeRobotomyRequestForm, &Intern::makePresidentialPardonForm};
+    return new ShrubberyCreationForm(target);
+}
+
+Form *makeRobotomyRequestForm(std::string target)
+{
+    return new RobotomyRequestForm(target);
+}
+
+Form *makePresidentialPardonForm(std::string target)
+{
+    return new PresidentialPardonForm(target);
+}
+
+Form *Intern::makeForm(std::string const & formName, std::string target)
+{
+    typedef Form *(*funcPtr)(std::string target);
     std::string formNameArray[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+    funcPtr funcArray[3] = {&makeShrubberyCreationForm, &makeRobotomyRequestForm, &makePresidentialPardonForm};
     for (int i = 0; i < 3; i++)
     {
         if (formName == formNameArray[i])
         {
             std::cout << "Intern creates " << formName << std::endl;
-            return (this->*funcArray[i])(target);
+            return (funcArray[i])(target);
         }
     }
     std::cout << "Intern can't create " << formName << std::endl;

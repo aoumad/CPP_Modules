@@ -3,12 +3,17 @@
 
 # include <iostream>
 # include <string>
-# include "Form.hpp"
+# include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-class Intern : public 
+class Form;
+class PresidentialPardonForm;
+class RobotomyRequestForm;
+class ShrubberyCreationForm;
+
+class Intern
 {
     public:
         Intern();
@@ -17,7 +22,8 @@ class Intern : public
 
         Intern & operator=(Intern const & rhs);
 
-        Form *makeForm(std::string const & formName, std::string const & target);
+        Form *makeForm(std::string const & formName, std::string target);
 };
+
 
 #endif
