@@ -50,15 +50,15 @@ catch
 }
 ```
 
-## Try
+## Try block
 
 A `try` block is used to enclose a sectio of code that may throw an exception. if an exception is thrown within the try block, the program will immediately jump to the corresponding `catch` block that can handle that type of exception.
 
-## catch
+## catch block
 
 A `catch` block is used to handle exception that was thrown within a try block. It takes an argument, which is the type of exception that it can handle, and it is executed when the exception is thrown.
 
-## Throw
+## Throw block
 
 The `Throw` statement is used to throw an exception. It is typically used within a fucntion to indicate that an error can occured. When a throw statement is executed, the program will jump immediately jump out of the current function and look for a catch block that can handle the exception.
 
