@@ -41,5 +41,9 @@ int main(void)
     std::cout << *form << std::endl;
     std::cout << *form2 << std::endl;
     std::cout << *form3 << std::endl;
+
+    delete form;
+    delete form2;
+    delete form3;
     return (0);
 }
