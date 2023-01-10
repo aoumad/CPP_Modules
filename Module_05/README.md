@@ -1,6 +1,8 @@
 ## Table of contents
 - [Exception classes](#exception-classes)
-- [try](#try)
+- [try block](#try-block)
+- [catch block](#catch-block)
+- [throw block](#throw-block)
 - [what() function](#what()-function)
 
 ## Exception classes
