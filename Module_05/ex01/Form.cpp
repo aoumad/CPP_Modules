@@ -2,11 +2,13 @@
 
 Form::Form() : _name("Default"), _gradeToSign(5), _gradeToExecute(6)
 {
+    _signed = false;
     std::cout << "Default constructor called" << std::endl;
 }
 
 Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
+    _signed = false;
     std::cout << "Constructor called" << std::endl;
 }
 

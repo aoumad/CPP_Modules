@@ -2,11 +2,13 @@
 
 Form::Form() : _name("Default"), _gradeToSign(5), _gradeToExecute(6)
 {
+    _signed = false;
     std::cout << "Default constructor called" << std::endl;
 }
 
 Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
+    _signed = false;
     std::cout << "Constructor called" << std::endl;
 }
 
@@ -52,9 +54,17 @@ int         Form::getGradeToExecute() const
     return (this->_gradeToExecute);
 }
 
-void        Form::setSigned(bool sign)
+void        Form::beSigned(const Bureaucrat &bureaucrat)
 {
-    this->_signed = sign;
+    if (bureaucrat.getGrade() <= this->_gradeToSign)
+    {
+        this->_signed = true;
+        std::cout << "The form status has been validated successfully" << std::endl;
+    }
+    else
+    {
+        throw Form::GradeTooLowException();
+    }
 }
 
 const char* Form::GradeTooHighException::what() const throw()

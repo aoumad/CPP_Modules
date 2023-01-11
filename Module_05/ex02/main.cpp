@@ -16,10 +16,19 @@ int main(void)
     std::cout << *form << std::endl;
     std::cout << *form2 << std::endl;
     std::cout << *form3 << std::endl;
+    std::cout << "----------------------------------------" << std::endl;
 
     bureaucrat->signForm(*form);
     bureaucrat->signForm(*form2);
     bureaucrat->signForm(*form3);
+
+    std::cout << "----------------------------------------" << std::endl;
+    std::cout << *bureaucrat << std::endl;
+    std::cout << *form << std::endl;
+    std::cout << *form2 << std::endl;
+    std::cout << *form3 << std::endl;
+
+    std::cout << "----------------------------------------" << std::endl;
 
     bureaucrat->executeForm(*form);
     bureaucrat->executeForm(*form2);

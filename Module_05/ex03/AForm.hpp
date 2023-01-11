@@ -11,8 +11,8 @@ class Form
     private:
         const std::string _name;
         bool _signed;
-        const int _gradeToSign;
-        const int _gradeToExecute;
+        int const _gradeToSign;
+        int const _gradeToExecute;
         
         public:
             Form();
