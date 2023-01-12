@@ -1,91 +1,171 @@
 #include "Conversion.hpp"
 
-Conversion::Conversion()
-{
-    this->_iVal = 0;
-    this->_fVal = 0.0f;
-    this->_dVal = 0.0;
-    this->_cVal = "\0";
-    std::cout << "Conversion default constructor" << std::endl;
-}
+// Conversion::Conversion()
+// {
+// }
 
-Conversion::Conversion(const Conversion& other)
-{
-    *this = other;
-}
+// Conversion::Conversion(std::string str)
+// {
+// }
 
-Conversion&  Conversion::operator= (const Conversion& other)
-{
-    (void)other;
-    return (*this);
-}
+// Conversion::Conversion(const Conversion &copy)
+// {
+// }
 
-void    Conversion::convert(const std::string& literal)
+// Conversion &Conversion::operator=(const Conversion &copy)
+// {
+// }
+
+// Conversion::~Conversion()
+// {
+// }
+
+void    convert(std::string &literal)
 {
-    std::string specialTypes[6] =
+    std::stringstream   ss;
+    std::string         tmp;
+    size_t              pos;
+
+    int     _iVal = 0;
+    float   _fVal = 0.0f;
+    double  _dVal = 0.0;
+    char    _cVal = 0;
+    bool    _isChar = false;
+    bool    _isInt = false;
+    bool    _isFloat = false;
+    bool    _isDouble = false;
+    bool    _isImpossible = false;
+    bool    _isNan = false;
+    bool    _isInf = false;
+
+    if (literal.length() == 1 && !isdigit(literal[0]) && literal != "\0")
     {
-		"-inff", "+inff", "nanf",
-		"-inf", "+inf", "nan"
-	};
-
-    if (literal.size() == 1 && std::isdigit(literal[0]) && std::isprint(literal[0]))
-    {
-        this->_cVal = literal[0];
-        this->_iVal = static_cast<int>(this->_cVal);
-        this->_fVal = static_cast<float>(this->_cVal);
-        this->_dVal = static_cast<double>(this->_dVal);
-        std::cout << "char: " << this->_cVal << std::endl;
-        std::cout << "int: " << this->_iVal  << std::endl;
-        std::cout << "flaot: " << this->_fVal << std::endl;
-        std::cout << "double: " << this->_dVal << std::endl;
-        return ;
+        _cVal = literal[0];
     }
-
-    if (std::isprint(std::atoi(literal.c_str())) && this->_cVal == "\0")
+    else if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
     {
-        this->_cVal = "'" + static_cast<char>(std::atoi(literal.c_str())) + "'";
+        _cVal = literal[1];
+        // _iVal = static_cast<int>(_cVal);
+        // _fVal = static_cast<float>(_cVal);
+        // _dVal = static_cast<double>(_cVal);
+        // _isChar = true;
     }
-    else if (this->_cVal == "\0")
-        this->_cVal = "Non Displayable";
-
-    for (int i = 0; i < 6; i++)
+    if (literal == "\0")
     {
-        if (literal == specialTypes[i])
+        _isImpossible = true;
+        _isChar = false;
+    }
+    // if (this->_cVal == "\0")
+    //     this->_isImpossible = true;
+    else
+    {
+        pos = literal.find('.');
+        if (pos != std::string::npos)
         {
-            this->_cVal = "impossible";
-            break;
+            tmp = literal.substr(pos + 1);
+            if (tmp.find_first_not_of("0123456789") == std::string::npos)
+            {
+                _isFloat = true;
+                _isDouble = true;
+            }
+        }
+        else
+        {
+            _isInt = true;
+            _isDouble = true;
+        }
+        if (_isInt || _isFloat || _isDouble)
+        {
+            ss << literal;
+            if (_isInt)
+                ss >> _iVal;
+            if (_isFloat)
+                ss >> _fVal;
+            if (_isDouble)
+                ss >> _dVal;
+            if (ss.fail())
+            {
+                _isImpossible = true;
+                _isInt = false;
+                _isFloat = false;
+                _isDouble = false;
+            }
+            else
+            {
+                if (_isInt)
+                {
+                    if (_iVal < 0 || _iVal > 127)
+                        _isImpossible = true;
+                    else
+                    {
+                        _cVal = static_cast<char>(_iVal);
+                        _fVal = static_cast<float>(_iVal);
+                        _dVal = static_cast<double>(_iVal);
+                    }
+                }
+                if (_isFloat)
+                {
+                    if (isnan(_fVal))
+                        _isNan = true;
+                    else if (isinf(_fVal))
+                        _isInf = true;
+                    else if (_fVal < 0 || _fVal > 127)
+                        _isImpossible = true;
+                    else
+                    {
+                        _cVal = static_cast<char>(_fVal);
+                        _iVal = static_cast<int>(_fVal);
+                        _dVal = static_cast<double>(_fVal);
+                    }
+                }
+                if (_isDouble)
+                {
+                    if (isnan(_dVal))
+                        _isNan = true;
+                    else if (isinf(_dVal))
+                        _isInf = true;
+                    else if (_dVal < 0 || _dVal > 127)
+                        _isImpossible = true;
+                    else
+                    {
+                        _cVal = static_cast<char>(_dVal);
+                        _iVal = static_cast<int>(_dVal);
+                        _fVal = static_cast<float>(_dVal);
+                    }
+                }
+            }
         }
     }
 
-    std::cout << "char: " << this->_cVal << std::endl;
-    if (this->_cVal == "impossible")
-        std::cout << "int: " << this->_cVal << std::endl;
+    if (_isChar)
+        std::cout << "char: " << _cVal << std::endl;
+    else if (_isImpossible)
+        std::cout << "char: impossible" << std::endl;
     else
-    {
-        this->_iVal = std::atoi(literal.c_str());
-        std::cout << "int: " << this->_iVal << std::endl; 
-    }
-
-    if (literal[literal.size() - 1] == 'f')
-    {
-        this->_fVal = std::atof(literal.c_str());
-        this->_dVal = static_cast<double>(this->_fVal);
-    }
-    else
-    {
-        this->_dVal = std::stod(literal.c_str());
-        this->_fVal = static_cast<float>(this->_dVal);
-    }
-
-    if (literal == "nan")
-    {
-        std::cout << "float: nanf" << std::endl;
+        std::cout << "char: Non displayable" << std::endl;
+    
+    if (_isDouble)
+        std::cout << "double: " << _dVal << std::endl;
+    else if (_isImpossible)
+        std::cout << "double: impossible" << std::endl;
+    else if (_isNan)
         std::cout << "double: nan" << std::endl;
-    }
+    else if (_isInf)
+        std::cout << "double: inf" << std::endl;
+    
+    if (_isFloat)
+        std::cout << "float: " << _fVal << "f" << std::endl;
+    else if (_isImpossible)
+        std::cout << "float: impossible" << std::endl;
+    else if (_isNan)
+        std::cout << "float: nanf" << std::endl;
+    else if (_isInf)
+        std::cout << "float: inff" << std::endl;
+    
+    if (_isInt)
+        std::cout << "int: " << _iVal << std::endl;
+    else if (_isImpossible)
+        std::cout << "int: impossible" << std::endl;
     else
-    {
-        std::cout << "float: " << this->_fVal << std::endl;
-        std::cout << "double: " << this->_dVal << std::endl;
-    }
-    return ;
+        std::cout << "int: Non displayable" << std::endl;
 }

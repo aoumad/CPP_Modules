@@ -7,7 +7,7 @@ int main(int argc, char **argv)
         std::cout << "Error: no parameters\n" << "Usage: <program> <literal>" << std::endl;
 		return 1;
     }
-
-    Conversion::convert(argv[1]);
+    std::string arg(argv[1]);
+    convert(arg);
     return (0);
 }
