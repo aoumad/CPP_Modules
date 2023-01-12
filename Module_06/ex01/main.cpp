@@ -2,10 +2,18 @@
 
 int main(void)
 {
-    uintptr_t   i = 4;
-    Data    obj(i);
+    Data *data = new Data;
+    data->s1 = "Hello";
+    data->n = 42;
+    data->s2 = "World";
 
-    std::cout << obj.serialize(&obj) << std::endl;
-    std::cout << obj.deserialize(obj.serialize(&obj)) << std::endl;
-    return (0);
+    uintptr_t raw = serialize(data);
+    Data *deserialized = deserialize(raw);
+
+    std::cout << "s1: " << deserialized->s1 << std::endl;
+    std::cout << "n: " << deserialized->n << std::endl;
+    std::cout << "s2: " << deserialized->s2 << std::endl;
+
+    delete data;
+    return 0;
 }
