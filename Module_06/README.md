@@ -1,8 +1,6 @@
 ## Table of contents
 - [casts in C++](#casts-in-c++)
 - [uintptr_t](#vuintptr_t)
-- [static_cast<>](#static_cast<>)
-- [einterpret_cast<>](#einterpret_cast<>)
 
 ## Casts in C++:
 
