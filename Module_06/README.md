@@ -35,4 +35,8 @@ uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
 some_funtion(addr);
 ```
 
-In this example, `ptr` is a pointer to an `int` array, and `addr` is a variable of type `uintptr_t`
+In this example, `ptr` is a pointer to an `int` array, and `addr` is a variable of type `uintptr_t` that stores the memory address of `ptr`. The `reinterpret_cast` is used to convert the pointer to `int` array to `uintptr_t` type.
+
+It's also worth noting that it is not safe to perform arithmetic operations on `uintptr_t` variables, as it may not be guaranteed that the resulting value will still be a valid memory address.
+
+In short, `uintptr_t` is an unsigned integer type, defined in the `<cstdint>` header and it's used to represent a pointer value as an integer. it's useful when you need to pass a pointer as an argument to a function that only accepts an integer type, but it's not safe to perform arithmetic operations on it.
