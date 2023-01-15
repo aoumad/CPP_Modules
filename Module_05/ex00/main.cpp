@@ -2,8 +2,24 @@
 
 int main(void)
 {
-    Bureaucrat b("Bureaucrat", 150);
-    std::cout << b << std::endl;
+    try
+    {
+        Bureaucrat b("Bureaucrat", 154440);
+        try
+        {
+            b.decrementGrade();
+        }
+        catch (std::exception & e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+        std::cout << b << std::endl;
+    }
+    catch (std::exception & e)
+    {
+        std::cout << "Grade out of range " << e.what() << std::endl;
+        return (0);
+    }
 
     // try
     // {
@@ -14,16 +30,6 @@ int main(void)
     //     std::cout << e.what() << std::endl;
     // }
     // std::cout << b << std::endl;
-
-
-    try
-    {
-        b.decrementGrade();
-    }
-    catch (std::exception & e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-    std::cout << b << std::endl;
+    
     return (0);
 }

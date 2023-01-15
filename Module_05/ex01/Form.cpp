@@ -57,10 +57,7 @@ int         Form::getGradeToExecute() const
 void        Form::beSigned(const Bureaucrat &bureaucrat)
 {
     if (bureaucrat.getGrade() <= this->_gradeToSign)
-    {
         this->_signed = true;
-        std::cout << "The form status has been validated successfully" << std::endl;
-    }
     else
         throw Form::GradeTooLowException();
 }

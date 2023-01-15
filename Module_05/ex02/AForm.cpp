@@ -77,6 +77,11 @@ const char* Form::GradeTooLowException::what() const throw()
     return ("You underrated the grade, which is limited in the range [1, 150]");
 }
 
+const char* Form::FormNotSignedException::what() const throw()
+{
+    return ("The form is not signed");
+}
+
 std::ostream& operator<<(std::ostream &out, const Form &form)
 {
     out << "Form name: " << form.getName() << std::endl;

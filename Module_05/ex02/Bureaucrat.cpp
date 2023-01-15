@@ -9,6 +9,10 @@ Bureaucrat::Bureaucrat()
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
     std::cout << "Constructor called" << std::endl;
+    if (this->_grade < 1)
+        throw Bureaucrat::GradeTooHighException();
+    else if (this->_grade > 150)
+        throw Bureaucrat::GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const &src)
@@ -92,6 +96,6 @@ void    Bureaucrat::executeForm(Form const & form)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cout << form.getName() << " not executed" << std::endl;
     }
 }
