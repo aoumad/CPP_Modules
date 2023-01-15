@@ -4,7 +4,7 @@ int main(void)
 {
     try
     {
-        Bureaucrat b("Bureaucrat", 154440);
+        Bureaucrat b("Bureaucrat", 149);
         try
         {
             b.decrementGrade();
