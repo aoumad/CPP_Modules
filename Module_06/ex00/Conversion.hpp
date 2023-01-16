@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <cfloat>
 #include <ctype.h>
 #include <iostream>
 #include <string>
@@ -16,4 +17,9 @@
 
 void    convert(std::string &literal);
 
+int     isChar(std::string &literal);
+int     isFloat(std::string &literal);
+int     isDouble(std::string &literal);
+int     isInt(std::string &literal);
+void    convert(std::string &literal);
 #endif

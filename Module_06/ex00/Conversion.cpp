@@ -1,171 +1,131 @@
 #include "Conversion.hpp"
 
-// Conversion::Conversion()
-// {
-// }
 
-// Conversion::Conversion(std::string str)
-// {
-// }
 
-// Conversion::Conversion(const Conversion &copy)
-// {
-// }
-
-// Conversion &Conversion::operator=(const Conversion &copy)
-// {
-// }
-
-// Conversion::~Conversion()
-// {
-// }
+// i will use pointers to functions to see if the number is int,double,float,char, using switch case
 
 void    convert(std::string &literal)
 {
-    std::stringstream   ss;
-    std::string         tmp;
-    size_t              pos;
-
-    int     _iVal = 0;
+    int _iVal = 0;
     float   _fVal = 0.0f;
     double  _dVal = 0.0;
     char    _cVal = 0;
-    bool    _isChar = false;
-    bool    _isInt = false;
-    bool    _isFloat = false;
-    bool    _isDouble = false;
-    bool    _isImpossible = false;
-    bool    _isNan = false;
-    bool    _isInf = false;
+    bool    _char = false;
+    int (*p[4])(std::string &literal) = {&isInt, &isDouble, &isFloat, &isChar};
+    for (int i = 0; i < 4; i++)
+    {
+        if (p[i](literal))
+        {
+            switch (i)
+            {
+                case 0:
+                    _iVal = std::stoi(literal);
+                    _fVal = static_cast<float>(_iVal);
+                    _dVal = static_cast<double>(_iVal);
+                    _cVal = static_cast<char>(_iVal);
+                case 1:
+                    _dVal = std::stod(literal);
+                    _fVal = static_cast<float>(_dVal);
+                    _iVal = static_cast<int>(_dVal);
+                    _cVal = static_cast<char>(_dVal);
+                case 2:
+                    _fVal = std::stof(literal);
+                    _dVal = static_cast<double>(_fVal);
+                    _iVal = static_cast<int>(_fVal);
+                    _char = true;
+                case 3:
+                    _cVal = literal[0];
+                    _iVal = static_cast<int>(_cVal);
+                    _dVal = static_cast<int>(_cVal);
+                    _fVal = static_cast<int>(_cVal);
+            }
+            break;
+        }
+    }
+    std::cout << "char: ";
+    if ((_cVal >= 32 && _cVal <= 47) || (_cVal >= 58 && _cVal <= 126))
+        std::cout << "\'" << _cVal << std::cout << "\'" << std::endl;
+    else if (_cVal < 32 || _cVal > 126 || (_cVal >= 48 && _cVal <= 57))
+        std::cout << "Non displayable" << std::endl;
+    else if (_char == true)
+        std::cout << "\'" << "*" << "\'" << std::endl;
+    else
+        std::cout << "impossible" << std::endl;
 
-    if (literal.length() == 1 && !isdigit(literal[0]) && literal != "\0")
-    {
-        _cVal = literal[0];
-    }
-    else if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
-    {
-        _cVal = literal[1];
-        // _iVal = static_cast<int>(_cVal);
-        // _fVal = static_cast<float>(_cVal);
-        // _dVal = static_cast<double>(_cVal);
-        // _isChar = true;
-    }
-    if (literal == "\0")
-    {
-        _isImpossible = true;
-        _isChar = false;
-    }
-    // if (this->_cVal == "\0")
-    //     this->_isImpossible = true;
+    std::cout << "int: ";
+    if (_iVal >= INT_MIN && _iVal <= INT_MAX)
+        std::cout << _iVal << std::endl;
     else
-    {
-        pos = literal.find('.');
-        if (pos != std::string::npos)
-        {
-            tmp = literal.substr(pos + 1);
-            if (tmp.find_first_not_of("0123456789") == std::string::npos)
-            {
-                _isFloat = true;
-                _isDouble = true;
-            }
-        }
-        else
-        {
-            _isInt = true;
-            _isDouble = true;
-        }
-        if (_isInt || _isFloat || _isDouble)
-        {
-            ss << literal;
-            if (_isInt)
-                ss >> _iVal;
-            if (_isFloat)
-                ss >> _fVal;
-            if (_isDouble)
-                ss >> _dVal;
-            if (ss.fail())
-            {
-                _isImpossible = true;
-                _isInt = false;
-                _isFloat = false;
-                _isDouble = false;
-            }
-            else
-            {
-                if (_isInt)
-                {
-                    if (_iVal < 0 || _iVal > 127)
-                        _isImpossible = true;
-                    else
-                    {
-                        _cVal = static_cast<char>(_iVal);
-                        _fVal = static_cast<float>(_iVal);
-                        _dVal = static_cast<double>(_iVal);
-                    }
-                }
-                if (_isFloat)
-                {
-                    if (isnan(_fVal))
-                        _isNan = true;
-                    else if (isinf(_fVal))
-                        _isInf = true;
-                    else if (_fVal < 0 || _fVal > 127)
-                        _isImpossible = true;
-                    else
-                    {
-                        _cVal = static_cast<char>(_fVal);
-                        _iVal = static_cast<int>(_fVal);
-                        _dVal = static_cast<double>(_fVal);
-                    }
-                }
-                if (_isDouble)
-                {
-                    if (isnan(_dVal))
-                        _isNan = true;
-                    else if (isinf(_dVal))
-                        _isInf = true;
-                    else if (_dVal < 0 || _dVal > 127)
-                        _isImpossible = true;
-                    else
-                    {
-                        _cVal = static_cast<char>(_dVal);
-                        _iVal = static_cast<int>(_dVal);
-                        _fVal = static_cast<float>(_dVal);
-                    }
-                }
-            }
-        }
-    }
+        std::cout << "impossible" << std::endl;
 
-    if (_isChar)
-        std::cout << "char: " << _cVal << std::endl;
-    else if (_isImpossible)
-        std::cout << "char: impossible" << std::endl;
+    std::cout << "float: ";
+    if (_fVal >= -FLT_MIN && _fVal <= FLT_MAX)
+        std::cout << _fVal << "f" << std::endl;
     else
-        std::cout << "char: Non displayable" << std::endl;
+        std::cout << "impossible" << std::endl;
     
-    if (_isDouble)
-        std::cout << "double: " << _dVal << std::endl;
-    else if (_isImpossible)
-        std::cout << "double: impossible" << std::endl;
-    else if (_isNan)
-        std::cout << "double: nan" << std::endl;
-    else if (_isInf)
-        std::cout << "double: inf" << std::endl;
-    
-    if (_isFloat)
-        std::cout << "float: " << _fVal << "f" << std::endl;
-    else if (_isImpossible)
-        std::cout << "float: impossible" << std::endl;
-    else if (_isNan)
-        std::cout << "float: nanf" << std::endl;
-    else if (_isInf)
-        std::cout << "float: inff" << std::endl;
-    
-    if (_isInt)
-        std::cout << "int: " << _iVal << std::endl;
-    else if (_isImpossible)
-        std::cout << "int: impossible" << std::endl;
+    std::cout << "double: ";
+    if (_dVal >= -DBL_MIN && _dVal <= DBL_MAX)
+        std::cout << _dVal << std::endl;
     else
-        std::cout << "int: Non displayable" << std::endl;
+        std::cout << "impossible" << std::endl;
+}
+
+int     isInt(std::string &literal)
+{
+    int i = 0;
+    if (literal[i] == '-' || literal[i] == '+')
+        i++;
+    while (literal[i])
+    {
+        if (!isdigit(literal[i]))
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+int     isDouble(std::string &literal)
+{
+    int i = 0;
+    int dot = 0;
+    if (literal[i] == '-' || literal[i] == '+')
+        i++;
+    while (literal[i])
+    {
+        if (literal[i] == '.')
+            dot++;
+        else if (!isdigit(literal[i]))
+            return (0);
+        i++;
+    }
+    if (dot > 1)
+        return (0);
+    return (1);
+}
+
+int     isFloat(std::string &literal)
+{
+    int i = 0;
+    int dot = 0;
+    if (literal[i] == '-' || literal[i] == '+')
+        i++;
+    while (literal[i])
+    {
+        if (literal[i] == '.')
+            dot++;
+        else if (!isdigit(literal[i]))
+            return (0);
+        i++;
+    }
+    if (dot > 1)
+        return (0);
+    return (1);
+}
+
+int     isChar(std::string &literal)
+{
+    if (literal.length() == 1 && isprint(literal[0]))
+        return (1);
+    return (0);
 }
