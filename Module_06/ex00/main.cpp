@@ -9,5 +9,7 @@ int main(int argc, char **argv)
     }
     std::string arg(argv[1]);
     convert(arg);
+    // int n = static_cast<int>(12e2);
+    // std::cout << n << std::endl;
     return (0);
 }

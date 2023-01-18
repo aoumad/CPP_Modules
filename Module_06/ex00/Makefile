@@ -1,4 +1,4 @@
-NAME =  Bureaucrat
+NAME =  Conversion
 
 SRC		=	Conversion.cpp main.cpp
 
