@@ -108,14 +108,15 @@ int     isInt(std::string &literal)
     {
         if ((literal[i] == 'e' || literal[i] == 'E') && !isdigit(literal[i]))
         {
-            while (literal[i] == 'e' || literal[i] == 'E')
-                dot++;
+            dot++;
             i++;
             if (literal[i] == '+')
                 i++;
         }
-        else if (!isdigit(literal[i]))
+        else if (!isdigit(literal[i]) || literal[i] == '-')
+        {
             return (0);
+        }
         else
             i++;
     }
@@ -154,8 +155,7 @@ int     isFloat(std::string &literal)
     {
         if (literal[i] == 'e' || literal[i] == 'E')
         {
-            while (literal[i] == 'e' || literal[i] == 'E')
-                dot2++;
+            dot2++;
             i++;
             if (literal[i] == '-')
                 i++;

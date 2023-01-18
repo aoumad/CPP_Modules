@@ -23,4 +23,6 @@ int     isDouble(std::string &literal);
 int     isInt(std::string &literal);
 void    convert(std::string &literal);
 int     check(std::string &literal);
+
+// add exception class for out of range
 #endif
