@@ -3,7 +3,7 @@
 #include "B.hpp"
 #include "C.hpp"
 
-Base::~Base
+Base::~Base()
 {
     // nothing to do
 }
@@ -25,7 +25,8 @@ Base *make_c()
 
 Base *generate(void)
 {
-    Base *(*f[3])() = {make_a, make_b, make_c};
+    Base *(*f[3])() = {make_a, make_c, make_b};
+    srand(time(0));
     return f[rand() % 3]();
 }
 

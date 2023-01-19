@@ -1,6 +1,6 @@
 #include "B.hpp"
 
-B::~B
+B::~B()
 {
     // nothing to do
 }
