@@ -14,9 +14,9 @@ int main(int argc, char **argv)
     }
     catch (...)
     {
-        std::cout << "" << std::endl;
+        std::cout << "unable to cast : large input" << std::endl;
     }
-    // int n = static_cast<int>(12e2);
-    // std::cout << n << std::endl;
     return (0);
 }
+
+// `*` && string : sdklfjsdklee;ldkf || 56456456456.sdsds
