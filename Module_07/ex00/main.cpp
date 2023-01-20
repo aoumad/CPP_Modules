@@ -16,3 +16,4 @@ int main( void )
     std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
     return 0;
 }
+

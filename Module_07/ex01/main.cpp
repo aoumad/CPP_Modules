@@ -2,11 +2,7 @@
 
 int main(void)
 {
-    std::string s[] = {"Thor", "Odin", "Ragnar", "Floki"};
-    iter(s, 4, &arr_lem);
-
-    int arr[] = {1, 2, 3, 4};
-    iter(arr, 4, &arr_lem);
-
+    int array[5] = {1, 2, 3, 4, 5};
+    iter(array, 5, print);
     return (0);
 }

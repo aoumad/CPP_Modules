@@ -1,17 +1,24 @@
 #ifndef ITER_HPP
-#define ITER_HPP
+# define ITER_HPP
 
-template< typename T>
-void    iter(T& arr, size_t size, void(*arr_elm)(T &))
+#include <iostream>
+#include <string>
+
+/*
+The first parameter is the address of an array.
+• The second one is the length of the array.
+• The third one is a function that will be call on every element of the array*/
+template <typename T>
+void iter(T *array, int length, void (*f)(T const &))
 {
-    for (size_t i = 0; i < size, i++)
-        arr_lem(arr[i]);
+    for (int i = 0; i < length; i++)
+        f(array[i]);
 }
 
-template< typename T>
-void    arr_lem(T &i)
+template <typename T>
+void print(T const &x)
 {
-    std::cout << i << std::endl;
+    std::cout << x << std::endl;
 }
 
 #endif
