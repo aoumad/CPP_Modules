@@ -73,3 +73,30 @@ This class can be instantiated with any type of variable, such as integers, floa
 
 It's also possible to provide a specific implementation of a template for a certain type. This is called template specialization.
 
+```C++
+  template<typename T>
+  class Stack
+  {
+    // do something
+  }
+  
+  template<>
+  class Stack<bool>
+  {
+     private:
+        vector<bool> items'
+     public:
+        void  push(bool item)
+        {
+          item.push_back(item);
+        }
+        bool pop()
+        {
+            bool item = items.back();
+            item.pop_back();
+            return item;
+        }
+  };
+```
+
+With this, the stack of booleans will use the specialized implementation, while the stack of other types will use the general one.
