@@ -126,3 +126,41 @@ The standard containers
     * `swap` : swaps the elements of the two stacks
     
 ## Iterators
+- An iterator is an object designed to traverse through a container, providing access to each element along the way. A container may provide different kinds of iterators.
+- Once the appropriate type of iterator is created, the programmer can then use the interface provided by the iterator to traverse and access elements without having to worry about what kind of traversal is being done or how the data is being stored in the container. And because C++ iterators typically use the same interface for traversal (operator++ to move to the next element) and access (operator* to access the current element), we can iterate through a wide veriety of different container types using a consistent method.
+- Iterators let us view a non-linear collection in a linear manner. The whole point of iterators was to have a standard interface to iterate over data in any container. But we still had to specify what type of data this iterator was pointing to.
+- Any type that satisfy it's implicit interface is valid to use with a templatized function.
+- Every different collection comes equipped with it's own type of iterator. We want to ultimately write generic functions to work with iterators over any sequence. With templates we can!
+
+```C++
+vector<int> v;
+vector<int>::iterator itr = v.begin();
+
+vector<double> v;
+vector<double>::iterator itr = v.begin();
+
+deque<int> d;
+deque<int>::iterator itr = d.begin();
+```
+
+There are 5 different types of iterators:
+  * `Input`: For sequential, single pass input. Read only, can only be dereferenced on right side of expression. `int val = *itr;`
+  * `Output` : For sequential, single pass output. Write only, can only be dereferenced on left side of expression. `*itr = 12;`
+  * `Forward` : same as input/output iterators, except can make multiple passes. Can read from write to (if not const iterator). `int val1 = *itr; itr++; int val2 = *itr;`
+  * `Bidirectional` : Same as forward iterators except can also go backwards with `--`. `int val1 = *itr; --itr; int val2 = *itr;`
+  * `Random access` : Same as directional iterators except can be incremented or decremented by arbitraty amounts using `+` and `-`. `int val1 = *itr; itr = itr + 3; int val2 = *itr;`
+ 
+- Common traits among all iterators:
+    * Can be created from existing iterator.
+    * Can be advanced using `++`.
+    * Can be compared with `==` and `!=`
+
+ > **Note**
+  > Better to be pre-increment if you don't need the value before it incremented [source](https://stackoverflow.com/questions/1303899/performance-difference-between-iterator-and-iterator)
+    * Postincrement must return the value the iterator had BEFORE it was incrementing; so that previous value needs to be copied somewhere before altering it with the increment proper, so it's available to return.
+          - The extra work may be a little or a lot, but it certainly can't be less than zero, compared to a preincrement, which can simply perform the incrementing and then return the just-altered value -- no copying // saving // etc necessary
+          - So, unless you specifically MUST have postincrement (because you are using the "value before increment" in some way), you should always use preincrement instead.
+ 
+## Iterator adapters
+
+- Sometimes we need to form different types of iterators. They act like iterators (can be 
