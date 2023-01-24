@@ -1,14 +1,14 @@
-## Table of content
--[Intro to STL containers](#intro-to-stl-containers)
--[STL containers overview](#stl-containers-overview)
--[std::vector](#std::vector)
--[std::list](#std::list)
--[std::map](#std::map)
--[std::stack](#std::stack)
--[Iterators](#iterators)
--[Iterator adapters](#iterator-adapeters)
--[Algorithms](#algorithm)
--[Resources](#resources)
+## Table of contents
+- [Intro to STL containers](#intro-to-stl-containers)
+- [STL containers overview](#stl-containers-overview)
+- [std::vector](#stdvector)
+- [std::list](#stdlist)
+- [std::map](#stdmap)
+- [std::stack](#stdstack)
+- [Iterators](#iterators)
+- [Iterator adapters](#iterator-adapters)
+- [Algorithms](#algorithms)
+- [Resources](#resources)
 
 ## Intro to STL containers
 
@@ -50,6 +50,7 @@ int main()
   }
     return (0);
 }
+```
 
 > overview of STL
 
@@ -62,20 +63,66 @@ ______________________
 ## STL containers overview
 The standard containers
   - Sequence containers (used for data structures that store objects of the same type in a linear manner)
-      * array : a static contiguous array
-      * vector : a dynamic contiguous array
-      * forward_list : a single-linked list
-      * list : a doubly-linked list
-      * deque : a double-ended queue, where elements can be added to the front or back of the queue.
+      * `array` : a static contiguous array
+      * `vector` : a dynamic contiguous array
+      * `forward_list` : a single-linked list
+      * `list` : a doubly-linked list
+      * `deque` : a double-ended queue, where elements can be added to the front or back of the queue.
   - Container adapter (Not full container classes on their own, but wrappers around other container types. They encapsulate the underlying container type and limit the user interfaces accordingly.)
+      * `stack` : provides an LIFO data structure
+      * `queue` : provides a FILO data structure
+      * `priority_queue` : provides a priority queue, which allows for constant-time lookup of the largest element (by default)
+      
   - Associative containers
+      * keys are unique:
+          * `set`: a collection of unique keys, sorted by keys
+          * `map` : a collection of key-value pairs, sorted by keys
+      * multiple entries for the same key are permitted :
+          * `multiset` : a collection of unique keys, sorted by keys
+          * `multimap` : a collection of key-value pairs, sorted by keys
+  - Unordered associative containers
+      * keys are unique :
+          * `unordered set` : a collection of keys, hashed by keys
+          * `unordered-map` : a collection of key-value pairs, hashed by keys
+      * multiple enteries for the same key are permitted :
+          * `unordered_multiset` : a collection of keys, hashed by keys.
+          * `unordered_multimap` : a collection of key-value pairs, hashed by keys.
+  
+## std::vector
+- Vectors are `sequence containers` representing arrays that can change in size
+- Just like arrays, vectors use contiguous storage locations for their elements, which means that their elements can also be accessed using offsets on regular pointers to it's elements, and just as efficiently as in arrays. But unlike arrays, their `size can change dynamically`, with their storage being handled automatically by the container.
+- Internally, vectors use a `dynamically allocated array` to store their elements. This array may need to be reallocated in order to grow in size when new elements are inserted, which implies allocating a new array and moving all elements to it.
+- This is relatively expensive task in terms of processing time, and thus, vectors do not reallocate each time an element is added to the container. Instead, vector containers may allocate some extra storage to accommodate for possible growth, and thus `the container may have an actual capacity greater than the storage strictly needed to contain it's element (i.e it's size)`.
+- Reallocations should only happen at logarithmically growing intervals of size so that the insertion of individual elements at the end of the vector can be provided with amortized constant time complexity (see `push_back`).
+- Therefore, compared to arrays, vectors consume more memory in exchange for the ability to manage storage and grow dynamically in an efficient way.
+- Compared to the other dynamic sequence containers (`deques`, `lists` and `forward_lists`), vectors are very efficient accessing it's elements (just like arrays) and relatively efficient adding or removing elements elements from it's end. For operations that involve inserting or removing elements at positions other than the end, they perform worse than the others, and have less consistent iterators and references than `lists` and `forward_lists`.
 
+## std::list
 
+- Lists are `sequence containers` that allow constant time insert and erase operations anywhere within the sequence, and iteration in both directions.
+- List containers are implemented as `doubly-linked lists`; Doubly linked lists can store each of the elements they contain in different and unrelated storage locations. The ordering is kept internally by the association to each element of a link to the element preceding it and a link to the element following it.
+- They are very similar to `forward_list`: The main difference being that forward_list objects are `single-linked lists`, and thus they can only be iterated forwards, in exchange for being somewhat smaller and more efficient.
+- Compared to other base standard sequence containers (array, vector and deque), lists perform generally better in inserting, extracting and moving elements in any position within the container for which an iterator has already been obtained, and therefore also in algorithms that make intensive use of these, like sorting algorithms.
+- The main drawback of lists and forward_lists compared to these other sequence containers is that they lack direct access to the elements by their position; For example, to access the sixth element in a list, one has to iterate from a known position (like the beginning or the end) to that position, which takes linear time in the distance between these. They also consume some extra memory to keep the linking information associated to each element (which may be an important factor for large lists of small-sized elements).
 
+## std::map
 
+- Maps are `associative containers` that store elements formed by a combination of a key value and a mapped value, following a specifier order.
+- In a map, they key values are generally used to sort and uniquely identify the elements, while the mapped values store the content associated to this key. The types of key and mapped value may differ, and are grouped together in member type value-type, which is a pair type combining both: `typedef pair<const Key, T> value_type1`.
+- Internally, the elements in a map are always sorted by it's key following a specific strict weak ordering criterion indecated by it's internal comparaison object (of type Compare).
+- Map containers are generally slower than unordered_map containers to access individual elements by their key, but they allow the direct iteration on subsets based on their order.
+- The mapped values in a map can be accessed directly by their corresponding key using the bracket operator (`operator[]`).
+- Maps are typically implemented as binary search trees.
 
-
-
-
-
-```
+## std::stack
+- The std::stack` class is a container adapter that gives the programmer the functionality of a stack (a LIFO data structure).
+- `stacks` are implemented as container adaptors, which are classes that use an encapsulated object of a specific container classes that use an encapsulated object of a specific container class as it's underlying container, providing a specific set of member functions to access it's elements
+- The following operations are supported:
+    * `empty` : check if the stack is empty or not
+    * `size` : returns the number of elements present in the stack
+    * `push` : insert the element at the top of the stack 
+    * `pop` : removes single topmost element from the stack. it does not return anything
+    * `top` : returns the topmost element of the stack. It returns the element but not removes it.
+    * `swap` : swaps the elements of the two stacks
+    
+## Iterators
