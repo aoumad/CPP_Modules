@@ -54,10 +54,12 @@ int main()
 
 > overview of STL
 
+![alt text](https://github.com/aoumad/Netpractice/blob/main/images/overview_stl.png)
 ____________________
 
 > abstraction of STL
 
+![alt text](https://github.com/aoumad/Netpractice/blob/main/images/abtraction_stl.png)
 ______________________
 
 ## STL containers overview
@@ -163,4 +165,91 @@ There are 5 different types of iterators:
  
 ## Iterator adapters
 
-- Sometimes we need to form different types of iterators. They act like iterators (can be 
+- Sometimes we need to form different types of iterators. They act like iterators (can be dereferenced with `*` and can be advanced with `++`). However, they don't actually point to elements of a container.
+- `std::ostream_iterator`: whenever you dereference a `std::ostream_iterator` and assign a value to it, the value is printed to a specified `std::ostream`.
+
+```C++
+std::ostream_iterator<int> itr(cout, ", ")
+*itr = 3; // prints 3 to console
+++itr;
+*itr = 1729; // prints 1729 to console
+++itr;
+*itr = 13; // prints 13 to console
+```
+- With this, you can treat streams like iterators and use algorithms with them.
+```C++
+std::vector<int> v{3, 1, 4, 1, 5};
+std::copy(v.begin(), v.end(), std::ostream_iterator<int>(cout, ", "));
+```
+
+- The STL provides insert iterators (`std::inserter`, `std::black_inserter`, `std::front_inserter`). Writing to these iterators inserts the value into a container using one of the `insert`, `push_back`, `push_front`.
+
+> example: insert value to a vector
+```C++
+std::vector<int> v; // empty vec
+auto itr = std::back_inserter(v);
+*itr = 1729; // does v.push_back(1729)
+++itr;
+*itr = 13; // does v.push_back(13);
+++itr;
+*itr = 3; // does v.push_back(3)
+
+// v look like this: {1729, 13, 3}
+```
+> example: copy value one by one to a vector
+
+```C++
+vector<int> v {561, 1105, 1729, 2465};
+vector<int> vCopy; // start with an empty vector
+std::copy(v.begin(), v.end(), std::back_inserter(vCopy));
+```
+
+## Algorithms
+
+- The STL containers pre-written algorithms that operate on `iterators`. Doing so lets them work on many types of containers. Uses are determined by `types of iterators`. Rely heavily on `templates`.
+- We won't always know how much space will be needed for the destination. We want to be able to copy into a collection by "inserting" into it, rather than making space for it first (eg. pushback).
+
+> example
+```C++
+#include <iostream>
+#include <algorithm>
+#include <list>
+
+void displayInt(int i)
+{
+	std::cout << i << std::endl;
+}
+
+int main()
+{
+	std::list<int>  lst;
+
+	lst.pushback(10);
+	lst.pushback(23);
+	lst.pushback(3);
+	lst.pushback(17);
+	lst.pushback(20);
+
+	for_each(lst.begin(), lst.end(), displayInt);
+
+	return (0);
+}
+```
+
+> output
+```C++
+10
+23
+3
+17
+20
+```
+
+## Resources
+
+- [containers cppreference](https://www.cplusplus.com/reference/stl/)
+- [An Overview of C++ STL Containers](https://embeddedartistry.com/blog/2017/08/02/an-overview-of-c-stl-containers/)
+- [C++ Magicians STL Algorithm](https://www.geeksforgeeks.org/c-magicians-stl-algorithms/)
+- [algorithm functions](http://www.cplusplus.com/reference/algorithm/)
+- [Standford class on template](https://web.stanford.edu/class/archive/cs/cs106l/cs106l.1176/lectures/lecture05/05_Templates.pdf)
+- [Standford class on algorithm](https://web.stanford.edu/class/archive/cs/cs106l/cs106l.1176/lectures/lecture06/06_Algorithms.pdf)
