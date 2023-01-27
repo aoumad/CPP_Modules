@@ -27,7 +27,7 @@ Span &Span::operator=(const Span &copy)
 
 void Span::addNumber(int n)
 {
-    if (_v.size() < (unsigned long)n)
+    if (_v.size() < _n)
         _v.push_back(n);
     else
         throw std::exception();
@@ -55,4 +55,12 @@ int Span::longestSpan()
     std::vector<int> v = _v;
     std::sort(v.begin(), v.end());
     return (v[v.size() - 1] - v[0]);
+}
+
+void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+    for (std::vector<int>::iterator it = begin; it != end; it++)
+    {
+        addNumber(*it);
+    }
 }
